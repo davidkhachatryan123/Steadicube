@@ -166,10 +166,8 @@
                                       materialDesign:ComboBoxAssist.ShowSelectedItem="True"
                                       materialDesign:ComboBoxAssist.ClassicMode="True"
                                       Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                                      ItemsSource="{Binding ComPortValue}"
-                                      SelectedItem="{Binding ComPortValue}">
-
-                                <ComboBoxItem IsSelected="True" Content="COM1"></ComboBoxItem>
+                                      SelectedItem="{Binding ComPortValue}"
+                                      ItemsSource="{Binding ComPortValues}">
                             </ComboBox>
 
                         </Grid>
@@ -186,37 +184,24 @@
                                             HorizontalAlignment="Center"
                                             VerticalAlignment="Center"/>
 
-                            <ComboBox x:Name="BAUD_RATE_VALUE"
-                                            Margin="0 5 0 5"
-                                            Grid.Column="1"
-                                            materialDesign:ComboBoxAssist.ShowSelectedItem="True"
-                                            materialDesign:ComboBoxAssist.ClassicMode="True"
-                                            Style="{StaticResource MaterialDesignOutlinedComboBox}">
-
-                                <ComboBoxItem Content="300"></ComboBoxItem>
-                                <ComboBoxItem Content="600"></ComboBoxItem>
-                                <ComboBoxItem Content="1200"></ComboBoxItem>
-                                <ComboBoxItem Content="2400"></ComboBoxItem>
-                                <ComboBoxItem Content="4800"></ComboBoxItem>
-                                <ComboBoxItem IsSelected="True" Content="9600" Background="LightGreen"></ComboBoxItem>
-                                <ComboBoxItem Content="14400"></ComboBoxItem>
-                                <ComboBoxItem Content="19200"></ComboBoxItem>
-                                <ComboBoxItem Content="28800"></ComboBoxItem>
-                                <ComboBoxItem Content="31250"></ComboBoxItem>
-                                <ComboBoxItem Content="38400"></ComboBoxItem>
-                                <ComboBoxItem Content="57600"></ComboBoxItem>
-                                <ComboBoxItem Content="115200"></ComboBoxItem>
+                            <ComboBox Margin="0 5 0 5"
+                                      Grid.Column="1"
+                                      materialDesign:ComboBoxAssist.ShowSelectedItem="True"
+                                      materialDesign:ComboBoxAssist.ClassicMode="True"
+                                      Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                      SelectedItem="{Binding BaudRateValue}"
+                                      ItemsSource="{Binding BaudRateValues}">
                             </ComboBox>
 
                         </Grid>
 
-                        <Button x:Name="COM_REFRESH_Btn"
-                                        Margin="0 0 10 0"
-                                        Grid.Row="1"
-                                        Grid.Column="2"
-                                        Foreground="White"
-                                        Background="#3CAB76" BorderBrush="#3CAB76"
-                                        Width="50" Height="50">
+                        <Button Margin="0 0 10 0"
+                                Grid.Row="1"
+                                Grid.Column="2"
+                                Foreground="White"
+                                Background="#3CAB76" BorderBrush="#3CAB76"
+                                Width="50" Height="50"
+                                Command="{Binding SerialRefreshBtn}">
                             <materialDesign:PackIcon Kind="Refresh"/>
                         </Button>
                     </Grid>

@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using System.Text.Json;
 using System.IO;
+using System.Windows.Controls;
 
 using DeviceList = System.Collections.Generic.Dictionary<System.Guid, string>;
 
@@ -14,7 +15,8 @@ namespace Steadicube.ViewModel
     {
         private Settings settings;
         private JoyStick joystick;
-        private DeviceList deviceList;
+        private DeviceList joystickDeviceList;
+        private Serial serial;
 
 
         private RelayCommand loadedCommand;
@@ -28,13 +30,13 @@ namespace Steadicube.ViewModel
                       settings = new Settings("settings.json");
 
                       joystick = new JoyStick();
-                      deviceList = joystick.Devices;
-                      JoystickDevices = deviceList.Values;
+                      joystickDeviceList = joystick.Devices;
+                      JoystickDevices = joystickDeviceList.Values;
 
                       if (settings.Joystick != Guid.Empty)
                           try
                           {
-                              JoystickDevice = deviceList.Where(device => device.Key == settings.Joystick).First().Value;
+                              JoystickDevice = joystickDeviceList.Where(device => device.Key == settings.Joystick).First().Value;
                           }
                           catch
                           {
@@ -42,7 +44,88 @@ namespace Steadicube.ViewModel
                           }
 
                       SpeedSliderValue = settings.CameraSpeed;
+
+
+                      serial = new Serial();
+                      ComPortValues = serial.Ports;
+                      BaudRateValues = serial.Bauds;
+
+                      try
+                      {
+                          if (ComPortValues.Where(port => port == settings.ComPort).First() != string.Empty)
+                              ComPortValue = settings.ComPort;
+                      }
+                      catch
+                      {
+                          ComPortValue = ComPortValues.FirstOrDefault();
+                      }
+
+                      BaudRateValue = settings.BaudRate.ToString();
                   }));
+            }
+        }
+
+
+        private IEnumerable<string> comPortValues;
+
+        public IEnumerable<string> ComPortValues
+        {
+            get { return comPortValues; }
+            set
+            {
+                comPortValues = value;
+
+                OnPropertyChanged("ComPortValues");
+            }
+        }
+        private string comPortValue;
+        public string ComPortValue
+        {
+            get => comPortValue;
+            set
+            {
+                comPortValue = value;
+                settings.ComPort = comPortValue;
+
+                OnPropertyChanged("ComPortValue");
+            }
+        }
+
+        private IEnumerable<string> baudRateValues;
+
+        public IEnumerable<string> BaudRateValues
+        {
+            get { return baudRateValues; }
+            set
+            {
+                baudRateValues = value;
+
+                OnPropertyChanged("BaudRateValues");
+            }
+        }
+        private string baudRateValue;
+        public string BaudRateValue
+        {
+            get => baudRateValue;
+            set
+            {
+                baudRateValue = value;
+                settings.BaudRate = Convert.ToInt32(baudRateValue);
+
+                OnPropertyChanged("BaudRateValue");
+            }
+        }
+
+        private RelayCommand serialRefreshBtn;
+        public RelayCommand SerialRefreshBtn
+        {
+            get
+            {
+                return serialRefreshBtn ??
+                    (serialRefreshBtn = new RelayCommand(obj =>
+                    {
+                        ComPortValues = serial.Ports;
+                    }));
             }
         }
 
@@ -59,7 +142,6 @@ namespace Steadicube.ViewModel
                 OnPropertyChanged("JoystickDevices");
             }
         }
-
         private string joystickDevice;
         public string JoystickDevice
         {
@@ -70,7 +152,7 @@ namespace Steadicube.ViewModel
 
                 if (joystickDevice != null)
                 {
-                    settings.Joystick = settings.Joystick = deviceList.Where(device => device.Value == joystickDevice).First().Key;
+                    settings.Joystick = joystickDeviceList.Where(device => device.Value == joystickDevice).First().Key;
 
                     OnPropertyChanged("JoystickDevice");
                 }
@@ -85,8 +167,8 @@ namespace Steadicube.ViewModel
                 return joystickRefreshBtn ??
                     (joystickRefreshBtn = new RelayCommand(obj =>
                     {
-                        deviceList = joystick.Devices;
-                        JoystickDevices = deviceList.Values;
+                        joystickDeviceList = joystick.Devices;
+                        JoystickDevices = joystickDeviceList.Values;
                     }));
             }
         }
