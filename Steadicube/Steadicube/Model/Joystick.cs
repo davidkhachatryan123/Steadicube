@@ -1,10 +1,11 @@
 ﻿using SharpDX.DirectInput;
 using Steadicube.Classes;
+using Steadicube.Interfaces;
 using Steadicube.ViewModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
-
+using System.Windows.Media.Media3D;
 using DeviceList = System.Collections.Generic.Dictionary<System.Guid, string>;
 
 namespace Steadicube.Model
@@ -67,8 +68,7 @@ namespace Steadicube.Model
         }
 
 
-
-        public void Start(StatusBar3DViewModel statusBar3D)
+        public void Start()
         {
             JoystickMovement joystickMovement = new JoystickMovement();
 
@@ -77,63 +77,9 @@ namespace Steadicube.Model
                 while (true)
                 {
                     Update(joystickMovement);
-
-                    statusBar3D.vector3D.X = joystickMovement.Left_Stick_X;
                 }
             });
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        /*
-        public void MoveCube(MainWindow main, TranslateTransform3D CubeObj, Structures.Vector3D cubeSize, double speed, double angle, Action<Structures.Vector4D> vector4D, CancellationToken ct)
-        {
-            Task task = Task.Run(() =>
-            {
-                Velocity velocity = new Velocity();
-                Cube cube = new Cube(CubeObj);
-
-                while (true)
-                {
-                    this.Update(velocity);
-
-                    try
-                    {
-                        main.Dispatcher.Invoke(() =>
-                        {
-                            vector4D(cube.MoveCube(velocity, cubeSize, speed, angle));
-
-                            main.X_L.Content = velocity.x;
-                            main.Y_L.Content = velocity.y;
-                            main.Z_L.Content = velocity.z;
-                        });
-
-                        if (ct.IsCancellationRequested)
-                            return;
-                    }
-                    catch { }
-
-                    Thread.Sleep(10);
-                }
-            });
-        }*/
 
 
         public event PropertyChangedEventHandler PropertyChanged;

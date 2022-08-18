@@ -8,6 +8,7 @@ using System.IO;
 using Steadicube.View;
 
 using DeviceList = System.Collections.Generic.Dictionary<System.Guid, string>;
+using Steadicube.Interfaces;
 
 namespace Steadicube.ViewModel
 {
@@ -19,7 +20,6 @@ namespace Steadicube.ViewModel
         private Serial serial;
         private Cube cube;
         private Camera camera;
-
 
         private RelayCommand loadedCommand;
         public RelayCommand LoadedCommand
@@ -74,7 +74,6 @@ namespace Steadicube.ViewModel
                       camera!.position.X = cube.Length / 2;
                       camera!.position.Y = cube.Width / 2;
                       camera!.position.Z = cube.Height;
-
 
                       StartProgram();
                   }));

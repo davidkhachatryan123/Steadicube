@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Steadicube.View;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace Steadicube.ViewModel
