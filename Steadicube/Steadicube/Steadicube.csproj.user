@@ -10,6 +10,9 @@
     <Compile Update="View\Config.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\Mode.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\StatusBar3D.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -19,6 +22,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Config.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Mode.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\StatusBar3D.xaml">

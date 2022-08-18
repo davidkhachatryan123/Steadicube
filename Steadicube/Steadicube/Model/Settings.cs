@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using Steadicube.Enums;
+using System.IO;
 using System.Text.Json;
 
 namespace Steadicube.Model
@@ -10,11 +11,14 @@ namespace Steadicube.Model
         public Guid Joystick { get; set; }
         public int CameraSpeed { get; set; }
 
+        public M_Mode m_Mode { get; set; } = M_Mode.M1;
+        public S_Mode s_Mode { get; set; } = S_Mode.S1;
+
         public Settings()
         {
             this.ComPort = "COM1";
             this.BaudRate = 9600;
-            this.CameraSpeed = 10;
+            this.CameraSpeed = 1;
         }
 
         public Settings(string FilePath)

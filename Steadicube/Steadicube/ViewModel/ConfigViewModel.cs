@@ -8,7 +8,6 @@ using System.IO;
 using Steadicube.View;
 
 using DeviceList = System.Collections.Generic.Dictionary<System.Guid, string>;
-using Steadicube.Interfaces;
 
 namespace Steadicube.ViewModel
 {
@@ -86,7 +85,7 @@ namespace Steadicube.ViewModel
             {
                 joystick.SetJoystick(joystick.Devices.Keys.ToList().IndexOf(settings.Joystick));
 
-                joystick.Start();
+                joystick.Start(settings);
             }
         }
 

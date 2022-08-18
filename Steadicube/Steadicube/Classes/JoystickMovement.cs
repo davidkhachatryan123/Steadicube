@@ -25,5 +25,9 @@
         public bool Right_Btn_DOWN;
         public bool Right_Btn_RIGHT;
         public bool Right_Btn_LEFT;
+
+
+        public bool Left_Stick_BTN;
+        public bool Right_Stick_BTN;
     }
 }

@@ -125,6 +125,21 @@ namespace Steadicube.Classes
                         joystickMovement.Left_Btn_LEFT = false;
                     }
                     break;
+
+
+
+                case SharpDX.DirectInput.JoystickOffset.Buttons11:
+                    if (value > 0)
+                        joystickMovement.Right_Stick_BTN = true;
+                    else
+                        joystickMovement.Right_Stick_BTN = false;
+                    break;
+                case SharpDX.DirectInput.JoystickOffset.Buttons10:
+                    if (value > 0)
+                        joystickMovement.Left_Stick_BTN = true;
+                    else
+                        joystickMovement.Left_Stick_BTN = false;
+                    break;
             }
         }
     }

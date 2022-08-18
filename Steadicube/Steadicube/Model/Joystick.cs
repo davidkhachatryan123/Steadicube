@@ -1,11 +1,11 @@
 ﻿using SharpDX.DirectInput;
 using Steadicube.Classes;
-using Steadicube.Interfaces;
-using Steadicube.ViewModel;
+using Steadicube.Enums;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Windows;
-using System.Windows.Media.Media3D;
+using System.Windows.Threading;
 using DeviceList = System.Collections.Generic.Dictionary<System.Guid, string>;
 
 namespace Steadicube.Model
@@ -68,7 +68,7 @@ namespace Steadicube.Model
         }
 
 
-        public void Start()
+        public void Start(Settings settings)
         {
             JoystickMovement joystickMovement = new JoystickMovement();
 
@@ -77,8 +77,33 @@ namespace Steadicube.Model
                 while (true)
                 {
                     Update(joystickMovement);
+
+                    if (ApplicationInit(joystickMovement))
+                    {
+                        M_Mode m_mode = ModeChange(joystickMovement.Right_Btn_RIGHT);
+
+                        Debug.WriteLine(joystickMovement.Right_Btn_RIGHT);
+                    }
                 }
             });
+        }
+
+
+        private bool isInit = false;
+        private bool ApplicationInit(JoystickMovement joystickMovement)
+        {
+            if (joystickMovement.Right_Stick_BTN)
+                isInit = true;
+
+            return isInit;
+        }
+
+        M_Mode _m_mode_counter = M_Mode.M1;
+        private M_Mode ModeChange(bool btn)
+        {
+
+
+            return _m_mode_counter;
         }
 
 
