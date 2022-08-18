@@ -1,6 +1,9 @@
 ﻿using SharpDX.DirectInput;
+using Steadicube.Classes;
+using Steadicube.ViewModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows;
 
 using DeviceList = System.Collections.Generic.Dictionary<System.Guid, string>;
 
@@ -9,6 +12,7 @@ namespace Steadicube.Model
     public class JoyStick : INotifyPropertyChanged
     {
         private DeviceList devices;
+        private Joystick joystick;
 
         public DeviceList Devices
         {
@@ -29,37 +33,14 @@ namespace Steadicube.Model
             }
         }
 
-
-        /*
-        public Dictionary<Guid, string>? devices;
-        
-
-        public void UpdateList()
-        {
-            devices?.Clear();
-
-            DirectInput directInput = new DirectInput();
-
-            devices = new Dictionary<Guid, string>();
-
-            foreach (var deviceInstance in directInput.GetDevices())
-                devices.Add(deviceInstance.InstanceGuid, deviceInstance.ProductName);
-        }
-
         public void SetJoystick(int JoystickIndex)
         {
             DeleteJoystick();
 
-            if (JoystickIndex != -1)
-            {
-                DirectInput directInput = new DirectInput();
-
-                joystick = new Joystick(directInput, devices!.ElementAt(JoystickIndex).Key);
-
-                joystick.Properties.BufferSize = 128;
-
-                joystick.Acquire();
-            }
+            DirectInput directInput = new DirectInput();
+            joystick = new Joystick(directInput, devices!.ElementAt(JoystickIndex).Key);
+            joystick.Properties.BufferSize = 128;
+            joystick.Acquire();
         }
 
         public void DeleteJoystick()
@@ -68,7 +49,7 @@ namespace Steadicube.Model
                 joystick.Dispose();
         }
 
-        public void Update(Velocity velocity)
+        private void Update(JoystickMovement joystickMovement)
         {
             try
             {
@@ -77,7 +58,7 @@ namespace Steadicube.Model
 
                 if (datas != null)
                     foreach (var state in datas)
-                        CaptureJoystick.Capture(state.Offset, state.Value, velocity);
+                        JoystickCapture.Capture(state.Offset, state.Value, joystickMovement);
             }
             catch (Exception ex)
             {
@@ -85,6 +66,43 @@ namespace Steadicube.Model
             }
         }
 
+
+
+        public void Start(StatusBar3DViewModel statusBar3D)
+        {
+            JoystickMovement joystickMovement = new JoystickMovement();
+
+            Task task = Task.Run(() =>
+            {
+                while (true)
+                {
+                    Update(joystickMovement);
+
+                    statusBar3D.vector3D.X = joystickMovement.Left_Stick_X;
+                }
+            });
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /*
         public void MoveCube(MainWindow main, TranslateTransform3D CubeObj, Structures.Vector3D cubeSize, double speed, double angle, Action<Structures.Vector4D> vector4D, CancellationToken ct)
         {
             Task task = Task.Run(() =>
@@ -117,7 +135,9 @@ namespace Steadicube.Model
             });
         }*/
 
+
         public event PropertyChangedEventHandler PropertyChanged;
+
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
             if (PropertyChanged != null)

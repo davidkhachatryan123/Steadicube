@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using Steadicube.ViewModel;
+using System.Windows.Controls;
 
 namespace Steadicube.View
 {
@@ -10,6 +11,8 @@ namespace Steadicube.View
         public StatusBar3D()
         {
             InitializeComponent();
+
+            this.DataContext = new StatusBar3DViewModel();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Steadicube.ViewModel;
+﻿using Steadicube.Model;
+using Steadicube.ViewModel;
 using System.Windows.Controls;
 
 namespace Steadicube.View
@@ -13,6 +14,8 @@ namespace Steadicube.View
             InitializeComponent();
 
             this.DataContext = new ConfigViewModel();
+            this.Cube.DataContext = new Cube();
+            this.Camera.DataContext = new Camera();
         }
     }
 }

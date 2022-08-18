@@ -35,7 +35,6 @@
 
                 <View:StatusBar3D Grid.Row="1" Grid.Column="0" />
             </Grid>
-
             <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
 
             <View:Config Grid.Column="2"/>

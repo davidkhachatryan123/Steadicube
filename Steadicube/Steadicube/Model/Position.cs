@@ -1,9 +1,51 @@
-﻿namespace Steadicube.Model
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+namespace Steadicube.Model
 {
-    public class Position
+    public class Position : INotifyPropertyChanged
     {
-        public double X { get; set; } = 0;
-        public double Y { get; set; } = 0;
-        public double Z { get; set; } = 0;
+        private double x { get; set; } = 0;
+        private double y { get; set; } = 0;
+        private double z { get; set; } = 0;
+
+        public double X
+        {
+            get => x;
+            set
+            {
+                this.x = value;
+
+                OnPropertyChanged("X");
+            }
+        }
+        public double Y
+        {
+            get => y;
+            set
+            {
+                this.y = value;
+
+                OnPropertyChanged("Y");
+            }
+        }
+        public double Z
+        {
+            get => z;
+            set
+            {
+                this.z = value;
+
+                OnPropertyChanged("Z");
+            }
+        }
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        }
     }
 }

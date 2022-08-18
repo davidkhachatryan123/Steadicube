@@ -1,11 +1,51 @@
-﻿namespace Steadicube.Model
-{
-    public class Cube
-    {
-        public double Height { get; set; } = 0;
-        public double Width { get; set; } = 0;
-        public double Longitude { get; set; } = 0;
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
-        Position position { get; set; } = new Position();
+namespace Steadicube.Model
+{
+    public class Cube : INotifyPropertyChanged
+    {
+        private double width;
+        private double length;
+        private double height;
+
+        public double Width
+        {
+            get => width;
+            set
+            {
+                this.width = value;
+
+                OnPropertyChanged("Width");
+            }
+        }
+        public double Length
+        {
+            get => length;
+            set
+            {
+                this.length = value;
+
+                OnPropertyChanged("Length");
+            }
+        }
+        public double Height
+        {
+            get => height;
+            set
+            {
+                this.height = value;
+
+                OnPropertyChanged("Height");
+            }
+        }
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        }
     }
 }

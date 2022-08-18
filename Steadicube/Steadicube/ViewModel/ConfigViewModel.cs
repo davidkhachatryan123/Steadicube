@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using System.Text.Json;
 using System.IO;
-using System.Windows.Controls;
+using Steadicube.View;
 
 using DeviceList = System.Collections.Generic.Dictionary<System.Guid, string>;
 
@@ -17,6 +17,8 @@ namespace Steadicube.ViewModel
         private JoyStick joystick;
         private DeviceList joystickDeviceList;
         private Serial serial;
+        private Cube cube;
+        private Camera camera;
 
 
         private RelayCommand loadedCommand;
@@ -61,10 +63,42 @@ namespace Steadicube.ViewModel
                       }
 
                       BaudRateValue = settings.BaudRate.ToString();
+
+
+                      cube = (Cube)(obj as Config).Cube.DataContext;
+                      cube!.Width = 100;
+                      cube!.Height = 100;
+                      cube!.Length = 100;
+
+                      camera = (Camera)(obj as Config).Camera.DataContext;
+                      camera!.position.X = cube.Length / 2;
+                      camera!.position.Y = cube.Width / 2;
+                      camera!.position.Z = cube.Height;
+
+
+                      StartProgram();
                   }));
             }
         }
 
+        private void StartProgram()
+        {
+            if (settings.Joystick != Guid.Empty)
+            {
+                joystick.SetJoystick(joystick.Devices.Keys.ToList().IndexOf(settings.Joystick));
+
+                joystick.Start();
+            }
+        }
+
+
+        private RelayCommand setCommand;
+        public ICommand SetCommand => setCommand ??= new RelayCommand(Set);
+
+        private void Set(object commandParameter)
+        {
+
+        }
 
         private IEnumerable<string> comPortValues;
 
@@ -201,7 +235,10 @@ namespace Steadicube.ViewModel
             {
                 await JsonSerializer.SerializeAsync<Settings>(fs, settings);
             }
+
+            StartProgram();
         }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")

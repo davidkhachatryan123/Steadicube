@@ -5,6 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Steadicube.View"
              mc:Ignorable="d" 
+             xmlns:viewmodel="clr-namespace:Steadicube.ViewModel"
+             d:DataContext="{d:DesignInstance Type=viewmodel:StatusBar3DViewModel}"
              d:DesignHeight="40" d:DesignWidth="800">
     <Grid Grid.Row="2">
         <Grid.ColumnDefinitions>
@@ -17,18 +19,18 @@
                Grid.Column="0"
                HorizontalAlignment="Center" VerticalAlignment="Center"
                FontSize="20"
-               Content="X"/>
+               Content="{Binding vector3D.X}"/>
 
         <Label x:Name="Y_L"
                Grid.Column="1"
                HorizontalAlignment="Center" VerticalAlignment="Center"
                FontSize="20"
-               Content="Y"/>
+               Content="{Binding vector3D.Y}"/>
 
         <Label x:Name="Z_L"
                Grid.Column="2"
                HorizontalAlignment="Center" VerticalAlignment="Center"
                FontSize="20"
-               Content="Z"/>
+               Content="{Binding vector3D.Z}"/>
     </Grid>
 </UserControl>

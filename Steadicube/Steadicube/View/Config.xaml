@@ -6,21 +6,25 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Steadicube.View" xmlns:viewmodel="clr-namespace:Steadicube.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:ConfigViewModel}"
+             xmlns:local="clr-namespace:Steadicube.View"
+             xmlns:viewmodel="clr-namespace:Steadicube.ViewModel"
+             xmlns:Model="clr-namespace:Steadicube.Model"
+             d:DataContext="{d:DesignInstance Type=viewmodel:ConfigViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
-            <i:InvokeCommandAction Command="{Binding LoadedCommand}" />
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}"
+                                   CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
     <Grid>
         <dragablz:TabablzControl Grid.Column="2">
             <!--<dragablz:TabablzControl.InterTabController>
-                        <dragablz:InterTabController/>
-                    </dragablz:TabablzControl.InterTabController>-->
+                <dragablz:InterTabController/>
+            </dragablz:TabablzControl.InterTabController>-->
 
             <TabItem Header="Scene">
                 <Grid>
@@ -31,7 +35,7 @@
                         <RowDefinition Height="60"/>
                     </Grid.RowDefinitions>
 
-                    <Grid>
+                    <Grid x:Name="Cube" d:DataContext="{d:DesignInstance Type=Model:Cube}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="60"/>
@@ -49,29 +53,35 @@
                                    Margin="10 5 10 5"/>
 
 
-                        <TextBox materialDesign:HintAssist.Hint="X" Text="100"
-                                     Foreground="Black" materialDesign:TextFieldAssist.UnderlineBrush="#3CAB76"  materialDesign:HintAssist.Foreground="#3CAB76"
-                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                     materialDesign:TextFieldAssist.HasClearButton="True"
-                                     Margin="10 5 10 5"
-                                     Grid.Row="1" Grid.Column="0"/>
+                        <TextBox materialDesign:HintAssist.Hint="Width"
+                                 Foreground="Black" materialDesign:TextFieldAssist.UnderlineBrush="#3CAB76"  materialDesign:HintAssist.Foreground="#3CAB76"
+                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                 materialDesign:TextFieldAssist.HasClearButton="True"
+                                 Margin="10 5 10 5"
+                                 Grid.Row="1" Grid.Column="0"
+                                 Text="{Binding Path=Width,
+                                                UpdateSourceTrigger=PropertyChanged}"/>
 
-                        <TextBox materialDesign:HintAssist.Hint="Y" Text="100"
-                                     Foreground="Black" materialDesign:TextFieldAssist.UnderlineBrush="#3CAB76"  materialDesign:HintAssist.Foreground="#3CAB76"
-                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                     materialDesign:TextFieldAssist.HasClearButton="True"
-                                     Margin="10 5 10 5"
-                                     Grid.Row="1" Grid.Column="1"/>
+                        <TextBox materialDesign:HintAssist.Hint="Height"
+                                 Foreground="Black" materialDesign:TextFieldAssist.UnderlineBrush="#3CAB76"  materialDesign:HintAssist.Foreground="#3CAB76"
+                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                 materialDesign:TextFieldAssist.HasClearButton="True"
+                                 Margin="10 5 10 5"
+                                 Grid.Row="1" Grid.Column="1"
+                                 Text="{Binding Path=Height,
+                                                UpdateSourceTrigger=PropertyChanged}"/>
 
-                        <TextBox materialDesign:HintAssist.Hint="Z" Text="100"
-                                     Foreground="Black" materialDesign:TextFieldAssist.UnderlineBrush="#3CAB76"  materialDesign:HintAssist.Foreground="#3CAB76"
-                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                     materialDesign:TextFieldAssist.HasClearButton="True"
-                                     Margin="10 5 10 5"
-                                     Grid.Row="1" Grid.Column="2"/>
+                        <TextBox materialDesign:HintAssist.Hint="Length"
+                                 Foreground="Black" materialDesign:TextFieldAssist.UnderlineBrush="#3CAB76"  materialDesign:HintAssist.Foreground="#3CAB76"
+                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                 materialDesign:TextFieldAssist.HasClearButton="True"
+                                 Margin="10 5 10 5"
+                                 Grid.Row="1" Grid.Column="2"
+                                 Text="{Binding Path=Length,
+                                                UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
 
-                    <Grid Grid.Row="1">
+                    <Grid x:Name="Camera" d:DataContext="{d:DesignInstance Type=Model:Camera}" Grid.Row="1">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="60"/>
@@ -89,33 +99,41 @@
                                    Margin="10 5 10 5"/>
 
 
-                        <TextBox materialDesign:HintAssist.Hint="X" Text="0"
-                                     Foreground="Black" materialDesign:TextFieldAssist.UnderlineBrush="#3CAB76"  materialDesign:HintAssist.Foreground="#3CAB76"
-                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                     materialDesign:TextFieldAssist.HasClearButton="True"
-                                     Margin="10 5 10 5"
-                                     Grid.Row="1" Grid.Column="0"/>
+                        <TextBox materialDesign:HintAssist.Hint="X"
+                                 Foreground="Black" materialDesign:TextFieldAssist.UnderlineBrush="#3CAB76"  materialDesign:HintAssist.Foreground="#3CAB76"
+                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                 materialDesign:TextFieldAssist.HasClearButton="True"
+                                 Margin="10 5 10 5"
+                                 Grid.Row="1" Grid.Column="0"
+                                 Text="{Binding Path=position.X,
+                                                UpdateSourceTrigger=PropertyChanged}"/>
 
-                        <TextBox materialDesign:HintAssist.Hint="Y" Text="0"
-                                     Foreground="Black" materialDesign:TextFieldAssist.UnderlineBrush="#3CAB76"  materialDesign:HintAssist.Foreground="#3CAB76"
-                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                     materialDesign:TextFieldAssist.HasClearButton="True"
-                                     Margin="10 5 10 5"
-                                     Grid.Row="1" Grid.Column="1"/>
+                        <TextBox materialDesign:HintAssist.Hint="Y"
+                                 Foreground="Black" materialDesign:TextFieldAssist.UnderlineBrush="#3CAB76"  materialDesign:HintAssist.Foreground="#3CAB76"
+                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                 materialDesign:TextFieldAssist.HasClearButton="True"
+                                 Margin="10 5 10 5"
+                                 Grid.Row="1" Grid.Column="1"
+                                 Text="{Binding Path=position.Y,
+                                                UpdateSourceTrigger=PropertyChanged}"/>
 
-                        <TextBox materialDesign:HintAssist.Hint="Z" Text="0"
-                                     Foreground="Black" materialDesign:TextFieldAssist.UnderlineBrush="#3CAB76"  materialDesign:HintAssist.Foreground="#3CAB76"
-                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                     materialDesign:TextFieldAssist.HasClearButton="True"
-                                     Margin="10 5 10 5"
-                                     Grid.Row="1" Grid.Column="2"/>
+                        <TextBox materialDesign:HintAssist.Hint="Z"
+                                 Foreground="Black" materialDesign:TextFieldAssist.UnderlineBrush="#3CAB76"  materialDesign:HintAssist.Foreground="#3CAB76"
+                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                 materialDesign:TextFieldAssist.HasClearButton="True"
+                                 Margin="10 5 10 5"
+                                 Grid.Row="1" Grid.Column="2"
+                                 Text="{Binding Path=position.Z,
+                                                UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
 
                     <Button Content="Set"
-                                Foreground="White"
-                                Background="#3CAB76" BorderBrush="#3CAB76"
-                                Margin="10 0 10 0"
-                                Grid.Row="10"/>
+                            Foreground="White"
+                            Background="#3CAB76" BorderBrush="#3CAB76"
+                            Margin="10 0 10 0"
+                            Grid.Row="10"
+                            Command="{Binding SetCommand}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
 
                 </Grid>
             </TabItem>
