@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using Steadicube.ViewModel;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Steadicube
@@ -11,6 +12,8 @@ namespace Steadicube
         public MainWindow()
         {
             InitializeComponent();
+
+            this.DataContext = new MainWindowViewModel();
         }
     }
 }

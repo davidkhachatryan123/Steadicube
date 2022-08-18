@@ -10,8 +10,9 @@
         "dependencies": {
           "Dragablz": "0.0.3.223",
           "MaterialDesignThemes": "4.5.0",
-          "SharpDX": "4.2.0",
-          "System.IO.Ports": "6.0.0"
+          "SharpDX.DirectInput": "4.2.0",
+          "System.IO.Ports": "6.0.0",
+          "System.Windows.Interactivity.WPF": "2.0.20525"
         },
         "runtime": {
           "Steadicube.dll": {}
@@ -209,6 +210,18 @@
         },
         "runtime": {
           "lib/netstandard1.1/SharpDX.dll": {
+            "assemblyVersion": "4.2.0.0",
+            "fileVersion": "4.2.0.0"
+          }
+        }
+      },
+      "SharpDX.DirectInput/4.2.0": {
+        "dependencies": {
+          "NETStandard.Library": "1.6.1",
+          "SharpDX": "4.2.0"
+        },
+        "runtime": {
+          "lib/netstandard1.3/SharpDX.DirectInput.dll": {
             "assemblyVersion": "4.2.0.0",
             "fileVersion": "4.2.0.0"
           }
@@ -765,6 +778,18 @@
           "System.Runtime": "4.3.0"
         }
       },
+      "System.Windows.Interactivity.WPF/2.0.20525": {
+        "runtime": {
+          "lib/net40/Microsoft.Expression.Interactions.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "2.0.20525.0"
+          },
+          "lib/net40/System.Windows.Interactivity.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "2.0.20525.0"
+          }
+        }
+      },
       "System.Xml.ReaderWriter/4.3.0": {
         "dependencies": {
           "System.Collections": "4.3.0",
@@ -1017,6 +1042,13 @@
       "sha512": "sha512-3pv0LFMvfK/dv1qISJnn8xBeeT6R/FRvr0EV4KI2DGsL84Qlv6P7isWqxGyU0LCwlSVCJN3jgHJ4Bl0KI2PJww==",
       "path": "sharpdx/4.2.0",
       "hashPath": "sharpdx.4.2.0.nupkg.sha512"
+    },
+    "SharpDX.DirectInput/4.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-is6Lm9zULyeTbUaLXktF+MwzmUYE8jofhA+6qgR1HBIyRJ/c2rZbeG1VvvGf4w6ktfq/q3AvUWTNzwgdU/+XOg==",
+      "path": "sharpdx.directinput/4.2.0",
+      "hashPath": "sharpdx.directinput.4.2.0.nupkg.sha512"
     },
     "System.AppContext/4.3.0": {
       "type": "package",
@@ -1381,6 +1413,13 @@
       "sha512": "sha512-Z6YfyYTCg7lOZjJzBjONJTFKGN9/NIYKSxhU5GRd+DTwHSZyvWp1xuI5aR+dLg+ayyC5Xv57KiY4oJ0tMO89fQ==",
       "path": "system.threading.timer/4.3.0",
       "hashPath": "system.threading.timer.4.3.0.nupkg.sha512"
+    },
+    "System.Windows.Interactivity.WPF/2.0.20525": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-0r+Le4E7hCm4zToUvBzjSUyTcuU3rFeoPa7JyTdWIzR/F7wH6+O/pWkjHIG40hIA0z1wvRdZayvoizA4wcK1dg==",
+      "path": "system.windows.interactivity.wpf/2.0.20525",
+      "hashPath": "system.windows.interactivity.wpf.2.0.20525.nupkg.sha512"
     },
     "System.Xml.ReaderWriter/4.3.0": {
       "type": "package",

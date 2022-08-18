@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\david\Desktop\Steadicube\Steadicube\obj\Debug\net6.0-windows\
+C:\Users\david\Desktop\Steadicube\Steadicube\Steadicube\obj\Debug\net6.0-windows\
 Steadicube
 none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
-C:\Users\david\Desktop\Steadicube\Steadicube\App.xaml
-21179081172
+C:\Users\david\Desktop\Steadicube\Steadicube\Steadicube\App.xaml
+41900009233
 
-9117691389
-199-1331013866
-MainWindow.xaml;View\Top.xaml;
+18-811125434
+2021662158582
+MainWindow.xaml;View\Config.xaml;View\StatusBar3D.xaml;View\Top.xaml;
 
-False
+True
 
