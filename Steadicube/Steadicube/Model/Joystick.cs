@@ -80,9 +80,7 @@ namespace Steadicube.Model
 
                     if (ApplicationInit(joystickMovement))
                     {
-                        M_Mode m_mode = ModeChange(joystickMovement.Right_Btn_RIGHT);
-
-                        Debug.WriteLine(joystickMovement.Right_Btn_RIGHT);
+                        //M_Mode m_mode = ModeChange(joystickMovement.Right_Btn_RIGHT);
                     }
                 }
             });
@@ -98,13 +96,6 @@ namespace Steadicube.Model
             return isInit;
         }
 
-        M_Mode _m_mode_counter = M_Mode.M1;
-        private M_Mode ModeChange(bool btn)
-        {
-
-
-            return _m_mode_counter;
-        }
 
 
         public event PropertyChangedEventHandler PropertyChanged;
