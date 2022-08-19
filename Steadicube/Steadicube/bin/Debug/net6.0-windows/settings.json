@@ -1,1 +1,1 @@
-{"ComPort":"COM5","BaudRate":9600,"Joystick":"3f2e06c0-1a45-11ed-8001-444553540000","CameraSpeed":0.00038888888888888903,"cube":{"LengthBind":30000,"WidthBind":30000,"HeightBind":30000,"Width":30000,"Length":30000,"Height":30000}}
+{"ComPort":"COM1","BaudRate":9600,"Joystick":"8f554490-18e9-11ed-8001-444553540000","CameraSpeed":0.0004722222222222222,"cube":{"LengthBind":20000,"WidthBind":30000,"HeightBind":30000,"Width":30000,"Length":20000,"Height":30000}}}
