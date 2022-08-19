@@ -1,6 +1,7 @@
 ﻿using Steadicube.Enums;
 using System.IO;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Steadicube.Model
 {
@@ -13,6 +14,8 @@ namespace Steadicube.Model
 
         public Cube cube { get; set; }
 
+        [JsonIgnore]
+        public Serial serial { get; set; }
 
         public Settings()
         {

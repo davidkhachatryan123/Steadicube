@@ -81,8 +81,6 @@ namespace Steadicube.Model
 
                 while (true)
                 {
-                    //Thread.Sleep(10);
-
                     Update(joystickMovement);
 
                     if (ApplicationInit(joystickMovement))
@@ -90,7 +88,15 @@ namespace Steadicube.Model
                         ChangeMode(joystickMovement.Right_Btn_RIGHT, ref m_Mode, (m_Mode) => { ModeViewModel.modeViewModel.m_Mode = m_Mode; });
                         ChangeS_Mode(joystickMovement.Left_Stick_BTN, ref s_Mode, (s_Mode) => { ModeViewModel.modeViewModel.s_Mode = s_Mode; });
 
-                        ConfigViewModel.configViewModel.camera.MoveCamera(joystickMovement, ConfigViewModel.configViewModel.cube, s_Mode, ConfigViewModel.configViewModel.settings);
+                        ConfigViewModel.configViewModel.camera.MoveCamera(
+                            joystickMovement,
+                            ConfigViewModel.configViewModel.cube,
+                            s_Mode,
+                            ConfigViewModel.configViewModel.settings,
+                            (vector4D) =>
+                            {
+                                settings.serial.SendSerial(vector4D);
+                            });
                     }
                 }
             });
@@ -101,13 +107,7 @@ namespace Steadicube.Model
         private bool ApplicationInit(JoystickMovement joystickMovement)
         {
             if (joystickMovement.Right_Stick_BTN)
-            {
                 isInit = true;
-
-                /*ConfigViewModel.configViewModel.camera.position.X = ConfigViewModel.configViewModel.cube.Length / 2;
-                ConfigViewModel.configViewModel.camera.position.Y = ConfigViewModel.configViewModel.cube.Length / 2;
-                ConfigViewModel.configViewModel.camera.position.Z = ConfigViewModel.configViewModel.cube.Length;*/
-            }
 
             return isInit;
         }

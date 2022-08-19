@@ -7,14 +7,14 @@ namespace Steadicube.Model
 {
     public class Camera
     {
-        private readonly double width = 200;
-        private readonly double length = 200;
-        private readonly double height = 200;
+        private readonly double width = 0;
+        private readonly double length = 0;
+        private readonly double height = 0;
 
         public Position position { get; set; } = new Position();
         public Position positionBinding { get; set; } = new Position();
 
-        public void MoveCamera(JoystickMovement joyStickMovement, Cube cube, S_Mode mode, Settings settings)
+        public void MoveCamera(JoystickMovement joyStickMovement, Cube cube, S_Mode mode, Settings settings, Action<Vector4D> sendArduino)
         {
             if (mode == S_Mode.S1)
             {
@@ -63,11 +63,42 @@ namespace Steadicube.Model
                     Math.Round(position.X, 2),
                     Math.Round(position.Y, 2),
                     Math.Round(position.Z, 2));
+
+
+                sendArduino.Invoke(GetVectors(StatusBar3DViewModel.statusBar3DViewModel.vector3D, cube));
             }
             else if (mode == S_Mode.S2)
             {
 
             }
+        }
+
+
+        private Vector4D GetVectors(Vector3D cameraPos, Cube cube)
+        {
+            return new Vector4D
+            {
+                A = Math.Sqrt(
+                Math.Pow(0 - Convert.ToDouble(cameraPos.X), 2) +
+                Math.Pow(0 - Convert.ToDouble(cameraPos.Y), 2) +
+                Math.Pow(0 - Convert.ToDouble(cameraPos.Z), 2)
+                ),
+                B = Math.Sqrt(
+                Math.Pow(Convert.ToDouble(cube.Length) - Convert.ToDouble(cameraPos.X), 2) +
+                Math.Pow(0 - Convert.ToDouble(cameraPos.Y), 2) +
+                Math.Pow(0 - Convert.ToDouble(cameraPos.Z), 2)
+                ),
+                C = Math.Sqrt(
+                Math.Pow(0 - Convert.ToDouble(cameraPos.X), 2) +
+                Math.Pow(Convert.ToDouble(cube.Width) - Convert.ToDouble(cameraPos.Y), 2) +
+                Math.Pow(0 - Convert.ToDouble(cameraPos.Z), 2)
+                ),
+                D = Math.Sqrt(
+                Math.Pow(Convert.ToDouble(cube.Length) - Convert.ToDouble(cameraPos.X), 2) +
+                Math.Pow(Convert.ToDouble(cube.Width) - Convert.ToDouble(cameraPos.Y), 2) +
+                Math.Pow(0 - Convert.ToDouble(cameraPos.Z), 2)
+                )
+            };
         }
     }
 }

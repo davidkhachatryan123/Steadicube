@@ -1,13 +1,19 @@
-﻿using System.ComponentModel;
+﻿using Steadicube.Classes;
+using System.ComponentModel;
 using System.IO.Ports;
 using System.Runtime.CompilerServices;
+using System.Windows.Threading;
 
 namespace Steadicube.Model
 {
     public class Serial : INotifyPropertyChanged
     {
-        private List<string> ports;
+        private SerialPort? serialPort;
+        private DispatcherTimer dispatcherTimer = new DispatcherTimer();
+        private bool isSend = false;
 
+
+        private List<string> ports;
         public List<string> Ports
         {
             get
@@ -50,6 +56,59 @@ namespace Steadicube.Model
 
                 return bauds;
             }
+        }
+
+
+        public void OpenPort(string port, int baud)
+        {
+            serialPort = new SerialPort(port, baud, Parity.None, 8, StopBits.One);
+
+            if (!serialPort.IsOpen)
+                serialPort.Open();
+
+            dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 100);
+            dispatcherTimer.Start();
+        }
+
+        public void ClosePort()
+        {
+            if (serialPort != null)
+            {
+                if (serialPort!.IsOpen)
+                    serialPort!.Close();
+
+                serialPort!.Dispose();
+            }
+
+            dispatcherTimer.Stop();
+            isSend = false;
+        }
+
+        public void SendSerial(Vector4D vector4D)
+        {
+            if (isSend)
+            {
+                if (serialPort!.IsOpen)
+                {
+                    serialPort!.WriteLine("A: " + Math.Round(vector4D.A)
+                            + "\nB: " + Math.Round(vector4D.B)
+                            + "\nC: " + Math.Round(vector4D.C)
+                            + "\nD: " + Math.Round(vector4D.D));
+
+                    isSend = false;
+                }
+            }
+        }
+
+        private void dispatcherTimer_Tick(object? sender, EventArgs e)
+        {
+            isSend = true;
+        }
+
+        ~Serial()
+        {
+            ClosePort();
         }
 
 

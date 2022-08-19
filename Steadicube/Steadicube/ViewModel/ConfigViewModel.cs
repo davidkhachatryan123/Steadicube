@@ -18,7 +18,6 @@ namespace Steadicube.ViewModel
         public Settings settings;
         private JoyStick joystick;
         private DeviceList joystickDeviceList;
-        private Serial serial;
         public Cube cube;
         public Camera camera;
 
@@ -52,9 +51,10 @@ namespace Steadicube.ViewModel
                       SpeedSliderValue = settings.CameraSpeed;
 
 
-                      serial = new Serial();
-                      ComPortValues = serial.Ports;
-                      BaudRateValues = serial.Bauds;
+                      settings.serial = new Serial();
+                      ComPortValues = settings.serial.Ports;
+                      BaudRateValues = settings.serial.Bauds;
+
 
                       try
                       {
@@ -92,6 +92,9 @@ namespace Steadicube.ViewModel
         {
             if (settings.Joystick != Guid.Empty && !isStarted)
             {
+                settings.serial.ClosePort();
+                settings.serial.OpenPort(settings.ComPort, settings.BaudRate);
+
                 joystick.SetJoystick(joystick.Devices.Keys.ToList().IndexOf(settings.Joystick));
 
                 joystick.Start(settings);
@@ -179,7 +182,7 @@ namespace Steadicube.ViewModel
                 return serialRefreshBtn ??
                     (serialRefreshBtn = new RelayCommand(obj =>
                     {
-                        ComPortValues = serial.Ports;
+                        ComPortValues = settings.serial.Ports;
                     }));
             }
         }
