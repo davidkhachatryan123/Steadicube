@@ -1,6 +1,7 @@
 ﻿using SharpDX.DirectInput;
 using Steadicube.Classes;
 using Steadicube.Enums;
+using Steadicube.ViewModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
@@ -57,6 +58,8 @@ namespace Steadicube.Model
                 joystick!.Poll();
                 var datas = joystick!.GetBufferedData();
 
+                JoystickCapture.Capture(JoystickOffset.Buttons99, -1, joystickMovement);
+
                 if (datas != null)
                     foreach (var state in datas)
                         JoystickCapture.Capture(state.Offset, state.Value, joystickMovement);
@@ -68,19 +71,25 @@ namespace Steadicube.Model
         }
 
 
+        //double counter = 0;
         public void Start(Settings settings)
         {
             JoystickMovement joystickMovement = new JoystickMovement();
 
             Task task = Task.Run(() =>
             {
+                M_Mode m_Mode = M_Mode.M1;
+
                 while (true)
                 {
                     Update(joystickMovement);
 
                     if (ApplicationInit(joystickMovement))
                     {
-                        //M_Mode m_mode = ModeChange(joystickMovement.Right_Btn_RIGHT);
+                        ChangeMode(joystickMovement.Right_Btn_RIGHT, ref m_Mode);
+
+                        //counter++;
+                        //StatusBar3DViewModel.statusBar3DViewModel.vector3D = new System.Windows.Media.Media3D.Vector3D(counter, 0, 0);
                     }
                 }
             });
@@ -94,6 +103,14 @@ namespace Steadicube.Model
                 isInit = true;
 
             return isInit;
+        }
+
+
+        private M_Mode ChangeMode(bool btn, ref M_Mode mode)
+        {
+
+
+            return mode;
         }
 
 

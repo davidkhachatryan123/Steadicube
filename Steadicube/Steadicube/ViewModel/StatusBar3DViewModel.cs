@@ -29,7 +29,7 @@ namespace Steadicube.ViewModel
             {
                 _vector3D = value;
 
-                OnPropertyChanged("Vector3D");
+                OnPropertyChanged("vector3D");
             }
         }
 

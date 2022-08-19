@@ -11,6 +11,8 @@ namespace Steadicube.Classes
         // PS4
         public static void Capture(SharpDX.DirectInput.JoystickOffset offset, int value, JoystickMovement joystickMovement)
         {
+            joystickMovement.Right_Btn_RIGHT = false;
+
             switch (offset)
             {
                 case SharpDX.DirectInput.JoystickOffset.X:
@@ -97,8 +99,6 @@ namespace Steadicube.Classes
                 case SharpDX.DirectInput.JoystickOffset.Buttons2:
                     if (value > 0)
                         joystickMovement.Right_Btn_RIGHT = true;
-                    else
-                        joystickMovement.Right_Btn_RIGHT = false;
                     break;
                 case SharpDX.DirectInput.JoystickOffset.Buttons0:
                     if (value > 0)
