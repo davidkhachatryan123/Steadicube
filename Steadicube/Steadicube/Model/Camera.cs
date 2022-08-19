@@ -7,9 +7,9 @@ namespace Steadicube.Model
 {
     public class Camera
     {
-        public readonly double width = 0;
-        public readonly double length = 0;
-        public readonly double height = 0;
+        public readonly double width = 200;
+        public readonly double length = 200;
+        public readonly double height = 200;
 
         public Position position { get; set; } = new Position();
         public Position positionBinding { get; set; } = new Position();
@@ -18,44 +18,44 @@ namespace Steadicube.Model
         {
             if (mode == S_Mode.S1)
             {
-                if (position.X + joyStickMovement.Left_Stick_X * settings.CameraSpeed >= 0 + length
-                    && position.X + joyStickMovement.Left_Stick_X * settings.CameraSpeed <= cube.Length - length)
+                if (position.X + joyStickMovement.Left_Stick_X * settings.CameraSpeed >= length / 2
+                    && position.X + joyStickMovement.Left_Stick_X * settings.CameraSpeed <= cube.Length - length / 2)
                     position.X += joyStickMovement.Left_Stick_X * settings.CameraSpeed;
                 else
                 {
                     if (position.X > cube.Length / 2)
-                        position.X = cube.Length - length;
+                        position.X = cube.Length - length / 2;
                     else
-                        position.X = length;
+                        position.X = length / 2;
                 }
 
-                if (position.Y - joyStickMovement.Left_Stick_Y * settings.CameraSpeed >= 0 + width
-                    && position.Y - joyStickMovement.Left_Stick_Y * settings.CameraSpeed <= cube.Width - width)
+                if (position.Y - joyStickMovement.Left_Stick_Y * settings.CameraSpeed >= width / 2
+                    && position.Y - joyStickMovement.Left_Stick_Y * settings.CameraSpeed <= cube.Width - width / 2)
                     position.Y -= joyStickMovement.Left_Stick_Y * settings.CameraSpeed;
                 else
                 {
                     if (position.Y > cube.Width / 2)
-                        position.Y = cube.Width - width;
+                        position.Y = cube.Width - width / 2;
                     else
-                        position.Y = width;
+                        position.Y = width / 2;
                 }
 
 
-                if (position.Z - joyStickMovement.R2 * settings.CameraSpeed >= height)
+                if (position.Z - joyStickMovement.R2 * settings.CameraSpeed >= height / 2)
                     position.Z -= joyStickMovement.R2 * settings.CameraSpeed;
                 else
                 {
                     if (position.Z < cube.Height / 2)
-                        position.Z = height;
+                        position.Z = height / 2;
                 }
 
-                if (position.Z - joyStickMovement.L2 * settings.CameraSpeed <= cube.Height - height)
+                if (position.Z - joyStickMovement.L2 * settings.CameraSpeed <= cube.Height - height / 2)
                     position.Z -= joyStickMovement.L2 * settings.CameraSpeed;
                 else
                 {
                     if (position.Z > cube.Height / 2)
                     {
-                        position.Z = cube.Height - height;
+                        position.Z = cube.Height - height / 2;
                     }
                 }
 
@@ -79,24 +79,24 @@ namespace Steadicube.Model
             return new Vector4D
             {
                 A = Math.Sqrt(
-                Math.Pow(0 - Convert.ToDouble(cameraPos.X), 2) +
-                Math.Pow(0 - Convert.ToDouble(cameraPos.Y), 2) +
-                Math.Pow(0 - Convert.ToDouble(cameraPos.Z), 2)
+                Math.Pow(0 - (cameraPos.X - length / 2), 2) +
+                Math.Pow(0 - (cameraPos.Y - width / 2), 2) +
+                Math.Pow(0 - (cameraPos.Z - height / 2), 2)
                 ),
                 B = Math.Sqrt(
-                Math.Pow(Convert.ToDouble(cube.Length) - Convert.ToDouble(cameraPos.X), 2) +
-                Math.Pow(0 - Convert.ToDouble(cameraPos.Y), 2) +
-                Math.Pow(0 - Convert.ToDouble(cameraPos.Z), 2)
+                Math.Pow(cube.Length - (cameraPos.X + length / 2), 2) +
+                Math.Pow(0 - (cameraPos.Y - width / 2), 2) +
+                Math.Pow(0 - (cameraPos.Z - height / 2), 2)
                 ),
                 C = Math.Sqrt(
-                Math.Pow(0 - Convert.ToDouble(cameraPos.X), 2) +
-                Math.Pow(Convert.ToDouble(cube.Width) - Convert.ToDouble(cameraPos.Y), 2) +
-                Math.Pow(0 - Convert.ToDouble(cameraPos.Z), 2)
+                Math.Pow(0 - (cameraPos.X - length / 2), 2) +
+                Math.Pow(cube.Width - (cameraPos.Y + width / 2), 2) +
+                Math.Pow(0 - (cameraPos.Z - height / 2), 2)
                 ),
                 D = Math.Sqrt(
-                Math.Pow(Convert.ToDouble(cube.Length) - Convert.ToDouble(cameraPos.X), 2) +
-                Math.Pow(Convert.ToDouble(cube.Width) - Convert.ToDouble(cameraPos.Y), 2) +
-                Math.Pow(0 - Convert.ToDouble(cameraPos.Z), 2)
+                Math.Pow(cube.Length - (cameraPos.X + length / 2), 2) +
+                Math.Pow(cube.Width - (cameraPos.Y + width / 2), 2) +
+                Math.Pow(0 - (cameraPos.Z - height / 2), 2)
                 )
             };
         }

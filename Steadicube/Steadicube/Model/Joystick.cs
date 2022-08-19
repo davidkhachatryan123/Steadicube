@@ -103,8 +103,16 @@ namespace Steadicube.Model
                             ConfigViewModel.configViewModel.settings,
                             (vector4D) =>
                             {
-                                settings.serial.SendSerial(vector4D);
+                                settings.serial.SendSerial_Vectors(vector4D);
                             });
+
+                        Rec(joystickMovement.Right_Btn_DOWN, settings);
+
+                        LeftButtons(joystickMovement.Left_Btn_UP, joystickMovement.Left_Btn_DOWN, m_Mode, settings);
+
+                        Zoom(joystickMovement, settings);
+
+                        MoveSteadi_RightStick(joystickMovement, settings);
                     }
                 }
             });
@@ -163,6 +171,71 @@ namespace Steadicube.Model
                     mode = S_Mode.S1;
 
             visualize.Invoke(mode);
+        }
+
+        private void Rec(bool btn, Settings settings)
+        {
+            if (btn)
+                settings.serial.SendSerial_ServoValue("rec", string.Empty);
+        }
+
+        private void LeftButtons(bool Btn_UP, bool Btn_DOWN, M_Mode mode, Settings settings)
+        {
+            if (Btn_UP || Btn_DOWN)
+                switch (mode)
+                {
+                    case M_Mode.M1:
+                        settings.serial.SendSerial_ServoValue("focus", Btn_UP == true ? "+" : "-");
+                        break;
+                    case M_Mode.M2:
+                        settings.serial.SendSerial_ServoValue("diaf", Btn_UP == true ? "+" : "-");
+                        break;
+                    case M_Mode.M3:
+                        settings.serial.SendSerial_ServoValue("iso", Btn_UP == true ? "+" : "-");
+                        break;
+                    case M_Mode.M4:
+                        settings.serial.SendSerial_ServoValue("shutter", Btn_UP == true ? "+" : "-");
+                        break;
+                }
+        }
+
+        private void Zoom(JoystickMovement joystickMovement, Settings settings)
+        {
+            if (joystickMovement.R1)
+                settings.serial.SendSerial_ServoValue("zoom", "+");
+            else if (joystickMovement.L1)
+                settings.serial.SendSerial_ServoValue("zoom", "-");
+        }
+
+        private bool z_0_IsSended = false;
+        private bool x1_0_IsSended = false;
+        private void MoveSteadi_RightStick(JoystickMovement joystickMovement, Settings settings)
+        {
+            if (joystickMovement.Right_Stick_Y == 0 && !z_0_IsSended)
+            {
+                settings.serial.SendSerial_ServoValue("z", "0");
+
+                z_0_IsSended = true;
+            }
+            else if (joystickMovement.Right_Stick_Y != 0)
+            {
+                settings.serial.SendSerial_ServoValue("z", joystickMovement.Right_Stick_Y.ToString());
+
+                z_0_IsSended = false;
+            }
+
+            if (joystickMovement.Right_Stick_X == 0 && !x1_0_IsSended)
+            {
+                settings.serial.SendSerial_ServoValue("x1", "0");
+
+                x1_0_IsSended = true;
+            }
+            else if (joystickMovement.Right_Stick_X != 0)
+            {
+                settings.serial.SendSerial_ServoValue("x1", joystickMovement.Right_Stick_X.ToString());
+
+                x1_0_IsSended = false;
+            }
         }
 
 

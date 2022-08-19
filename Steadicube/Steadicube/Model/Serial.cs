@@ -85,7 +85,7 @@ namespace Steadicube.Model
             isSend = false;
         }
 
-        public void SendSerial(Vector4D vector4D)
+        public void SendSerial_Vectors(Vector4D vector4D)
         {
             if (isSend)
             {
@@ -100,6 +100,14 @@ namespace Steadicube.Model
                 }
             }
         }
+
+
+        public void SendSerial_ServoValue(string servo, string value)
+        {
+            if (serialPort!.IsOpen)
+                serialPort!.WriteLine(string.Format("Servo: {0}, {1}", servo, value));
+        }
+
 
         private void dispatcherTimer_Tick(object? sender, EventArgs e)
         {

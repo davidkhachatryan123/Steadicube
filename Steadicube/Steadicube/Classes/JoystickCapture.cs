@@ -13,6 +13,14 @@ namespace Steadicube.Classes
         {
             joystickMovement.Right_Btn_RIGHT = false;
             joystickMovement.Left_Stick_BTN = false;
+            joystickMovement.Right_Btn_DOWN = false;
+            joystickMovement.L1 = false;
+            joystickMovement.R1 = false;
+            joystickMovement.Left_Btn_UP = false;
+            joystickMovement.Left_Btn_DOWN = false;
+            joystickMovement.Left_Btn_RIGHT = false;
+            joystickMovement.Left_Btn_LEFT = false;
+
 
             switch (offset)
             {
@@ -73,14 +81,10 @@ namespace Steadicube.Classes
                 case SharpDX.DirectInput.JoystickOffset.Buttons4:
                     if (value > 0)
                         joystickMovement.L1 = true;
-                    else
-                        joystickMovement.L1 = false;
                     break;
                 case SharpDX.DirectInput.JoystickOffset.Buttons5:
                     if (value > 0)
                         joystickMovement.R1 = true;
-                    else
-                        joystickMovement.R1 = false;
                     break;
 
 
@@ -94,8 +98,6 @@ namespace Steadicube.Classes
                 case SharpDX.DirectInput.JoystickOffset.Buttons1:
                     if (value > 0)
                         joystickMovement.Right_Btn_DOWN = true;
-                    else
-                        joystickMovement.Right_Btn_DOWN = false;
                     break;
                 case SharpDX.DirectInput.JoystickOffset.Buttons2:
                     if (value > 0)
@@ -118,13 +120,6 @@ namespace Steadicube.Classes
                         joystickMovement.Left_Btn_RIGHT = true;
                     else if (value == 27000)
                         joystickMovement.Left_Btn_LEFT = true;
-                    else
-                    {
-                        joystickMovement.Left_Btn_UP = false;
-                        joystickMovement.Left_Btn_DOWN = false;
-                        joystickMovement.Left_Btn_RIGHT = false;
-                        joystickMovement.Left_Btn_LEFT = false;
-                    }
                     break;
 
 
