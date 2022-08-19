@@ -33,12 +33,12 @@ namespace Steadicube.ViewModel
         }
 
         private S_Mode _s_Mode;
-        public string s_Mode
+        public S_Mode s_Mode
         {
-            get => _s_Mode.ToString();
+            get => _s_Mode;
             set
             {
-                Enum.TryParse<S_Mode>(value, out _s_Mode);
+                _s_Mode = value;
 
                 OnPropertyChanged("s_Mode");
             }

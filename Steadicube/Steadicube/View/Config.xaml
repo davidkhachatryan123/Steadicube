@@ -52,14 +52,22 @@
                                    FontWeight="Bold"
                                    Margin="10 5 10 5"/>
 
-
-                        <TextBox materialDesign:HintAssist.Hint="Width"
+                        <TextBox materialDesign:HintAssist.Hint="Length"
                                  Foreground="Black" materialDesign:TextFieldAssist.UnderlineBrush="#3CAB76"  materialDesign:HintAssist.Foreground="#3CAB76"
                                  Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                  materialDesign:TextFieldAssist.HasClearButton="True"
                                  Margin="10 5 10 5"
                                  Grid.Row="1" Grid.Column="0"
-                                 Text="{Binding Path=Width,
+                                 Text="{Binding Path=LengthBind,
+                                                UpdateSourceTrigger=PropertyChanged}"/>
+                        
+                        <TextBox materialDesign:HintAssist.Hint="Width"
+                                 Foreground="Black" materialDesign:TextFieldAssist.UnderlineBrush="#3CAB76"  materialDesign:HintAssist.Foreground="#3CAB76"
+                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                 materialDesign:TextFieldAssist.HasClearButton="True"
+                                 Margin="10 5 10 5"
+                                 Grid.Row="1" Grid.Column="1"
+                                 Text="{Binding Path=WidthBind,
                                                 UpdateSourceTrigger=PropertyChanged}"/>
 
                         <TextBox materialDesign:HintAssist.Hint="Height"
@@ -67,17 +75,8 @@
                                  Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                  materialDesign:TextFieldAssist.HasClearButton="True"
                                  Margin="10 5 10 5"
-                                 Grid.Row="1" Grid.Column="1"
-                                 Text="{Binding Path=Height,
-                                                UpdateSourceTrigger=PropertyChanged}"/>
-
-                        <TextBox materialDesign:HintAssist.Hint="Length"
-                                 Foreground="Black" materialDesign:TextFieldAssist.UnderlineBrush="#3CAB76"  materialDesign:HintAssist.Foreground="#3CAB76"
-                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                 materialDesign:TextFieldAssist.HasClearButton="True"
-                                 Margin="10 5 10 5"
                                  Grid.Row="1" Grid.Column="2"
-                                 Text="{Binding Path=Length,
+                                 Text="{Binding Path=HeightBind,
                                                 UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
 
@@ -276,6 +275,7 @@
 
                         <Slider Foreground="#3CAB76"
                                 Value="{Binding SpeedSliderValue}"
+                                Minimum="0"
                                 Maximum="10"
                                 VerticalAlignment="Center"
                                 Margin="10 0 10 0"

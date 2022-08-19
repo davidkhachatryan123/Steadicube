@@ -41,6 +41,17 @@ namespace Steadicube.Model
         }
 
 
+        public Position()
+        {
+
+        }
+        public Position(double x, double y, double z)
+        {
+            this.X = x;
+            this.Y = y;
+            this.Z = z;
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {

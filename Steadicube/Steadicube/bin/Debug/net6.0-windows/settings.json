@@ -1,1 +1,1 @@
-{"ComPort":"COM5","BaudRate":9600,"Joystick":"3f2e06c0-1a45-11ed-8001-444553540000","CameraSpeed":1,"m_Mode":0,"s_Mode":0}
+{"ComPort":"COM5","BaudRate":9600,"Joystick":"3f2e06c0-1a45-11ed-8001-444553540000","CameraSpeed":10,"cube":{"LengthBind":30000,"WidthBind":30000,"HeightBind":30000,"Width":30000,"Length":30000,"Height":30000},"camera":{"position":{"X":15000,"Y":15000,"Z":30000}}}

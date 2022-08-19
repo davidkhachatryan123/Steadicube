@@ -12,23 +12,24 @@ namespace Steadicube.Classes
         public static void Capture(SharpDX.DirectInput.JoystickOffset offset, int value, JoystickMovement joystickMovement)
         {
             joystickMovement.Right_Btn_RIGHT = false;
+            joystickMovement.Left_Stick_BTN = false;
 
             switch (offset)
             {
                 case SharpDX.DirectInput.JoystickOffset.X:
                     if (value > center + start_offset)
-                        joystickMovement.Left_Stick_X = -ExtensionMethods.Map(value, center, 0, 0, 100);
+                        joystickMovement.Left_Stick_X = -ExtensionMethods.Map(value, center, 0, 0, 1);
                     else if (value < center - start_offset)
-                        joystickMovement.Left_Stick_X = ExtensionMethods.Map(value, center, max, 0, 100);
+                        joystickMovement.Left_Stick_X = ExtensionMethods.Map(value, center, max, 0, 1);
                     else
                         joystickMovement.Left_Stick_X = 0;
                     break;
 
                 case SharpDX.DirectInput.JoystickOffset.Y:
                     if (value > center + start_offset)
-                        joystickMovement.Left_Stick_Y = -ExtensionMethods.Map(value, center, 0, 0, 100);
+                        joystickMovement.Left_Stick_Y = -ExtensionMethods.Map(value, center, 0, 0, 1);
                     else if (value < center - start_offset)
-                        joystickMovement.Left_Stick_Y = ExtensionMethods.Map(value, center, max, 0, 100);
+                        joystickMovement.Left_Stick_Y = ExtensionMethods.Map(value, center, max, 0, 1);
                     else
                         joystickMovement.Left_Stick_Y = 0;
                     break;
@@ -36,18 +37,18 @@ namespace Steadicube.Classes
 
                 case SharpDX.DirectInput.JoystickOffset.Z:
                     if (value > center + start_offset)
-                        joystickMovement.Right_Stick_X = -ExtensionMethods.Map(value, center, 0, 0, 100);
+                        joystickMovement.Right_Stick_X = -ExtensionMethods.Map(value, center, 0, 0, 1);
                     else if (value < center - start_offset)
-                        joystickMovement.Right_Stick_X = ExtensionMethods.Map(value, center, max, 0, 100);
+                        joystickMovement.Right_Stick_X = ExtensionMethods.Map(value, center, max, 0, 1);
                     else
                         joystickMovement.Right_Stick_X = 0;
                     break;
 
                 case SharpDX.DirectInput.JoystickOffset.RotationZ:
                     if (value > center + start_offset)
-                        joystickMovement.Right_Stick_Y = -ExtensionMethods.Map(value, center, max, 0, 100);
+                        joystickMovement.Right_Stick_Y = -ExtensionMethods.Map(value, center, max, 0, 1);
                     else if (value < center - start_offset)
-                        joystickMovement.Right_Stick_Y = ExtensionMethods.Map(value, center, 0, 0, 100);
+                        joystickMovement.Right_Stick_Y = ExtensionMethods.Map(value, center, 0, 0, 1);
                     else
                         joystickMovement.Right_Stick_Y = 0;
                     break;
@@ -56,14 +57,14 @@ namespace Steadicube.Classes
 
                 case SharpDX.DirectInput.JoystickOffset.RotationX:
                     if (value > start_offset)
-                        joystickMovement.L2 = -ExtensionMethods.Map(value, start_offset, max, 0, 100);
+                        joystickMovement.L2 = -ExtensionMethods.Map(value, start_offset, max, 0, 1);
                     else
                         joystickMovement.L2 = 0;
                     break;
 
                 case SharpDX.DirectInput.JoystickOffset.RotationY:
                     if (value > start_offset)
-                        joystickMovement.R2 = ExtensionMethods.Map(value, start_offset, max, 0, 100);
+                        joystickMovement.R2 = ExtensionMethods.Map(value, start_offset, max, 0, 1);
                     else
                         joystickMovement.R2 = 0;
                     break;
@@ -137,8 +138,6 @@ namespace Steadicube.Classes
                 case SharpDX.DirectInput.JoystickOffset.Buttons10:
                     if (value > 0)
                         joystickMovement.Left_Stick_BTN = true;
-                    else
-                        joystickMovement.Left_Stick_BTN = false;
                     break;
             }
         }

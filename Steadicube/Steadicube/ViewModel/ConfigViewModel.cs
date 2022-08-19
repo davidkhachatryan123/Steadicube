@@ -13,12 +13,14 @@ namespace Steadicube.ViewModel
 {
     public class ConfigViewModel : INotifyPropertyChanged
     {
-        private Settings settings;
+        public static ConfigViewModel configViewModel { get; set; }
+
+        public Settings settings;
         private JoyStick joystick;
         private DeviceList joystickDeviceList;
         private Serial serial;
-        private Cube cube;
-        private Camera camera;
+        public Cube cube;
+        public Camera camera;
 
         private RelayCommand loadedCommand;
         public RelayCommand LoadedCommand
@@ -28,6 +30,9 @@ namespace Steadicube.ViewModel
                 return loadedCommand ??
                   (loadedCommand = new RelayCommand(obj =>
                   {
+                      configViewModel = this;
+
+
                       settings = new Settings("settings.json");
 
                       joystick = new JoyStick();
@@ -65,27 +70,27 @@ namespace Steadicube.ViewModel
 
 
                       cube = (Cube)(obj as Config).Cube.DataContext;
-                      cube!.Width = 100;
-                      cube!.Height = 100;
-                      cube!.Length = 100;
+                      cube!.WidthBind = settings!.cube?.WidthBind == null ? 30000 : settings.cube.WidthBind;
+                      cube!.HeightBind = settings!.cube?.HeightBind == null ? 30000 : settings.cube.HeightBind;
+                      cube!.LengthBind = settings!.cube?.LengthBind == null ? 30000 : settings.cube.LengthBind;
 
-                      camera = (Camera)(obj as Config).Camera.DataContext;
-                      camera!.position.X = cube.Length / 2;
-                      camera!.position.Y = cube.Width / 2;
-                      camera!.position.Z = cube.Height;
+                      Set(obj);
 
                       StartProgram();
                   }));
             }
         }
 
+        private bool isStarted = false;
         private void StartProgram()
         {
-            if (settings.Joystick != Guid.Empty)
+            if (settings.Joystick != Guid.Empty && !isStarted)
             {
                 joystick.SetJoystick(joystick.Devices.Keys.ToList().IndexOf(settings.Joystick));
 
                 joystick.Start(settings);
+
+                isStarted = true;
             }
         }
 
@@ -95,7 +100,19 @@ namespace Steadicube.ViewModel
 
         private void Set(object commandParameter)
         {
+            cube.Width = cube.WidthBind;
+            cube.Height = cube.HeightBind;
+            cube.Length = cube.LengthBind;
 
+            camera = (Camera)(commandParameter as Config).Camera.DataContext;
+            camera!.position.X = cube.Length / 2;
+            camera!.position.Y = cube.Width / 2;
+            camera!.position.Z = cube.Height;
+
+            settings.cube = this.cube;
+            settings.camera = this.camera;
+
+            Save(null);
         }
 
         private IEnumerable<string> comPortValues;
@@ -206,7 +223,7 @@ namespace Steadicube.ViewModel
         }
 
 
-        public int SpeedSliderValue
+        public double SpeedSliderValue
         {
             set
             {

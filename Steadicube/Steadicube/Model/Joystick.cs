@@ -2,6 +2,7 @@
 using Steadicube.Classes;
 using Steadicube.Enums;
 using Steadicube.ViewModel;
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
@@ -71,7 +72,6 @@ namespace Steadicube.Model
         }
 
 
-        //double counter = 0;
         public void Start(Settings settings)
         {
             JoystickMovement joystickMovement = new JoystickMovement();
@@ -79,17 +79,20 @@ namespace Steadicube.Model
             Task task = Task.Run(() =>
             {
                 M_Mode m_Mode = M_Mode.M1;
+                S_Mode s_Mode = S_Mode.S1;
 
                 while (true)
                 {
+                    Thread.Sleep(10);
+
                     Update(joystickMovement);
 
                     if (ApplicationInit(joystickMovement))
                     {
-                        ChangeMode(joystickMovement.Right_Btn_RIGHT, ref m_Mode);
+                        ChangeMode(joystickMovement.Right_Btn_RIGHT, ref m_Mode, (m_Mode) => { ModeViewModel.modeViewModel.m_Mode = m_Mode; });
+                        ChangeS_Mode(joystickMovement.Left_Stick_BTN, ref s_Mode, (s_Mode) => { ModeViewModel.modeViewModel.s_Mode = s_Mode; });
 
-                        //counter++;
-                        //StatusBar3DViewModel.statusBar3DViewModel.vector3D = new System.Windows.Media.Media3D.Vector3D(counter, 0, 0);
+                        ConfigViewModel.configViewModel.camera.MoveCamera(joystickMovement, ConfigViewModel.configViewModel.cube, s_Mode, ConfigViewModel.configViewModel.settings);
                     }
                 }
             });
@@ -100,17 +103,60 @@ namespace Steadicube.Model
         private bool ApplicationInit(JoystickMovement joystickMovement)
         {
             if (joystickMovement.Right_Stick_BTN)
+            {
                 isInit = true;
+
+                /*ConfigViewModel.configViewModel.camera.position.X = ConfigViewModel.configViewModel.cube.Length / 2;
+                ConfigViewModel.configViewModel.camera.position.Y = ConfigViewModel.configViewModel.cube.Length / 2;
+                ConfigViewModel.configViewModel.camera.position.Z = ConfigViewModel.configViewModel.cube.Length;*/
+            }
 
             return isInit;
         }
 
-
-        private M_Mode ChangeMode(bool btn, ref M_Mode mode)
+        private DateTime end;
+        private bool pressed = false;
+        private void ChangeMode(bool btn, ref M_Mode mode, Action<M_Mode> visualize)
         {
+            if (!pressed && btn)
+            {
+                end = DateTime.Now + new TimeSpan(0, 0, 0, 0, 400);
 
+                pressed = true;
+                mode = M_Mode.M1;
 
-            return mode;
+                return;
+            }
+
+            if (pressed)
+            {
+                if (DateTime.Now < end)
+                {
+                    if (btn)
+                    {
+                        if (mode != M_Mode.M4)
+                        {
+                            mode++;
+                            end = DateTime.Now + new TimeSpan(0, 0, 0, 0, 400);
+                        }
+                    }
+                }
+                else
+                    pressed = false;
+            }
+
+            visualize.Invoke(mode);
+        }
+
+        private void ChangeS_Mode(bool btn, ref S_Mode mode, Action<S_Mode> visualize)
+        {
+            if (btn)
+                if (mode == S_Mode.S1)
+                    mode = S_Mode.S2;
+                else
+                    mode = S_Mode.S1;
+
+            visualize.Invoke(mode);
         }
 
 

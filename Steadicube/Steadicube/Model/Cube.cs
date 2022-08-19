@@ -41,6 +41,42 @@ namespace Steadicube.Model
         }
 
 
+        private double widthBind;
+        private double lengthBind;
+        private double heightBind;
+        public double WidthBind
+        {
+            get => widthBind;
+            set
+            {
+                this.widthBind = value;
+
+                OnPropertyChanged("WidthBind");
+            }
+        }
+        public double LengthBind
+        {
+            get => lengthBind;
+            set
+            {
+                this.lengthBind = value;
+
+                OnPropertyChanged("LengthBind");
+            }
+        }
+        public double HeightBind
+        {
+            get => heightBind;
+            set
+            {
+                this.heightBind = value;
+
+                OnPropertyChanged("HeightBind");
+            }
+        }
+
+
+
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
