@@ -8,6 +8,7 @@ using System.IO;
 using Steadicube.View;
 
 using DeviceList = System.Collections.Generic.Dictionary<System.Guid, string>;
+using System.Windows.Media.Media3D;
 
 namespace Steadicube.ViewModel
 {
@@ -19,7 +20,7 @@ namespace Steadicube.ViewModel
         private JoyStick joystick;
         private DeviceList joystickDeviceList;
         public Cube cube;
-        public Camera camera;
+        public Model.Camera camera;
 
         private RelayCommand loadedCommand;
         public RelayCommand LoadedCommand
@@ -74,7 +75,7 @@ namespace Steadicube.ViewModel
                       cube!.HeightBind = settings!.cube?.HeightBind == null ? 30000 : settings.cube.HeightBind;
                       cube!.LengthBind = settings!.cube?.LengthBind == null ? 30000 : settings.cube.LengthBind;
 
-                      camera = (Camera)(obj as Config).Camera.DataContext;
+                      camera = (Model.Camera)(obj as Config).Camera.DataContext;
                       camera!.position.X = camera.positionBinding.X = cube.LengthBind / 2;
                       camera!.position.Y = camera.positionBinding.Y = cube.WidthBind / 2;
                       camera!.position.Z = camera.positionBinding.Z = cube.HeightBind;
@@ -248,6 +249,68 @@ namespace Steadicube.ViewModel
                 return 0;
             }
         }
+
+
+        private RelayCommand _A_NullCommand;
+        public RelayCommand A_NullCommand
+        {
+            get
+            {
+                return _A_NullCommand ??
+                  (_A_NullCommand = new RelayCommand(obj =>
+                  {
+                      camera.position.X = 0;
+                      camera.position.Y = 0;
+                      camera.position.Z = 0;
+                  }));
+            }
+        }
+
+        private RelayCommand _B_NullCommand;
+        public RelayCommand B_NullCommand
+        {
+            get
+            {
+                return _B_NullCommand ??
+                  (_B_NullCommand = new RelayCommand(obj =>
+                  {
+                      camera.position.X = cube.Length - camera.length;
+                      camera.position.Y = 0;
+                      camera.position.Z = 0;
+                  }));
+            }
+        }
+
+        private RelayCommand _C_NullCommand;
+        public RelayCommand C_NullCommand
+        {
+            get
+            {
+                return _C_NullCommand ??
+                  (_C_NullCommand = new RelayCommand(obj =>
+                  {
+                      camera.position.X = 0;
+                      camera.position.Y = cube.Width - camera.width;
+                      camera.position.Z = 0;
+                  }));
+            }
+        }
+
+        private RelayCommand _D_NullCommand;
+        public RelayCommand D_NullCommand
+        {
+            get
+            {
+                return _D_NullCommand ??
+                  (_D_NullCommand = new RelayCommand(obj =>
+                  {
+                      camera.position.X = cube.Length - camera.length;
+                      camera.position.Y = cube.Width - camera.width;
+                      camera.position.Z = 0;
+                  }));
+            }
+        }
+
 
 
         private RelayCommand saveCommand;

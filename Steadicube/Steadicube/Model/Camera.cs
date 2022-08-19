@@ -7,9 +7,9 @@ namespace Steadicube.Model
 {
     public class Camera
     {
-        private readonly double width = 0;
-        private readonly double length = 0;
-        private readonly double height = 0;
+        public readonly double width = 0;
+        public readonly double length = 0;
+        public readonly double height = 0;
 
         public Position position { get; set; } = new Position();
         public Position positionBinding { get; set; } = new Position();

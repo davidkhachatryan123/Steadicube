@@ -60,7 +60,7 @@
                                  Grid.Row="1" Grid.Column="0"
                                  Text="{Binding Path=LengthBind,
                                                 UpdateSourceTrigger=PropertyChanged}"/>
-                        
+
                         <TextBox materialDesign:HintAssist.Hint="Width"
                                  Foreground="Black" materialDesign:TextFieldAssist.UnderlineBrush="#3CAB76"  materialDesign:HintAssist.Foreground="#3CAB76"
                                  Style="{StaticResource MaterialDesignOutlinedTextBox}"
@@ -143,6 +143,7 @@
                         <RowDefinition Height="95"/>
                         <RowDefinition Height="95"/>
                         <RowDefinition Height="50"/>
+                        <RowDefinition Height="95"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="60"/>
                     </Grid.RowDefinitions>
@@ -281,6 +282,47 @@
                                 Margin="10 0 10 0"
                                 Grid.Row="1"/>
 
+                    </Grid>
+
+                    <Grid  Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button Content="A"
+                                Grid.Column="0"
+                                Foreground="White"
+                                Background="LightGray" BorderBrush="LightGray"
+                                Width="50" Height="50"
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                Command="{Binding A_NullCommand}" />
+
+                        <Button Content="B"
+                                Grid.Column="1"
+                                Foreground="White"
+                                Background="LightGray" BorderBrush="LightGray"
+                                Width="50" Height="50"
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                Command="{Binding B_NullCommand}" />
+
+                        <Button Content="C"
+                                Grid.Column="2"
+                                Foreground="White"
+                                Background="LightGray" BorderBrush="LightGray"
+                                Width="50" Height="50"
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                Command="{Binding C_NullCommand}" />
+
+                        <Button Content="D"
+                                Grid.Column="3"
+                                Foreground="White"
+                                Background="LightGray" BorderBrush="LightGray"
+                                Width="50" Height="50"
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                Command="{Binding D_NullCommand}" />
                     </Grid>
 
                     <Button Content="Save"
