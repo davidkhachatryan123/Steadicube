@@ -12,7 +12,7 @@ namespace Steadicube.Model
         private readonly double height = 200;
 
         public Position position { get; set; } = new Position();
-
+        public Position positionBinding { get; set; } = new Position();
 
         public void MoveCamera(JoystickMovement joyStickMovement, Cube cube, S_Mode mode, Settings settings)
         {
@@ -58,6 +58,11 @@ namespace Steadicube.Model
                         position.Z = cube.Height - height;
                     }
                 }
+
+                StatusBar3DViewModel.statusBar3DViewModel.vector3D = new Vector3D(
+                    Math.Round(position.X, 2),
+                    Math.Round(position.Y, 2),
+                    Math.Round(position.Z, 2));
             }
             else if (mode == S_Mode.S2)
             {

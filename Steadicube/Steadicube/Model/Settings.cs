@@ -12,15 +12,13 @@ namespace Steadicube.Model
         public double CameraSpeed { get; set; }
 
         public Cube cube { get; set; }
-        public Camera camera { get; set; }
-
 
 
         public Settings()
         {
             this.ComPort = "COM1";
             this.BaudRate = 9600;
-            this.CameraSpeed = 1.0;
+            this.CameraSpeed = 0.001;
         }
 
         public Settings(string FilePath)
@@ -37,12 +35,11 @@ namespace Steadicube.Model
                     this.CameraSpeed = _settings!.CameraSpeed;
 
                     this.cube = _settings.cube;
-                    this.camera = _settings.camera;
                 }
             }
         }
 
-        public Settings(string ComPort, int BaudRate, Guid Joystick, int CameraSpeed, Cube cube, Camera camera)
+        public Settings(string ComPort, int BaudRate, Guid Joystick, int CameraSpeed, Cube cube)
         {
             this.ComPort = ComPort;
             this.BaudRate = BaudRate;
@@ -50,7 +47,6 @@ namespace Steadicube.Model
             this.CameraSpeed = CameraSpeed;
 
             this.cube = cube;
-            this.camera = camera;
         }
     }
 }

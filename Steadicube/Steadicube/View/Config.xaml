@@ -101,28 +101,28 @@
                         <TextBox materialDesign:HintAssist.Hint="X"
                                  Foreground="Black" materialDesign:TextFieldAssist.UnderlineBrush="#3CAB76"  materialDesign:HintAssist.Foreground="#3CAB76"
                                  Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                 materialDesign:TextFieldAssist.HasClearButton="True"
+                                 materialDesign:TextFieldAssist.HasClearButton="False"
                                  Margin="10 5 10 5"
                                  Grid.Row="1" Grid.Column="0"
-                                 Text="{Binding Path=position.X,
+                                 Text="{Binding Path=positionBinding.X,
                                                 UpdateSourceTrigger=PropertyChanged}"/>
 
                         <TextBox materialDesign:HintAssist.Hint="Y"
                                  Foreground="Black" materialDesign:TextFieldAssist.UnderlineBrush="#3CAB76"  materialDesign:HintAssist.Foreground="#3CAB76"
                                  Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                 materialDesign:TextFieldAssist.HasClearButton="True"
+                                 materialDesign:TextFieldAssist.HasClearButton="False"
                                  Margin="10 5 10 5"
                                  Grid.Row="1" Grid.Column="1"
-                                 Text="{Binding Path=position.Y,
+                                 Text="{Binding Path=positionBinding.Y,
                                                 UpdateSourceTrigger=PropertyChanged}"/>
 
                         <TextBox materialDesign:HintAssist.Hint="Z"
                                  Foreground="Black" materialDesign:TextFieldAssist.UnderlineBrush="#3CAB76"  materialDesign:HintAssist.Foreground="#3CAB76"
                                  Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                 materialDesign:TextFieldAssist.HasClearButton="True"
+                                 materialDesign:TextFieldAssist.HasClearButton="False"
                                  Margin="10 5 10 5"
                                  Grid.Row="1" Grid.Column="2"
-                                 Text="{Binding Path=position.Z,
+                                 Text="{Binding Path=positionBinding.Z,
                                                 UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
 
@@ -276,7 +276,7 @@
                         <Slider Foreground="#3CAB76"
                                 Value="{Binding SpeedSliderValue}"
                                 Minimum="0"
-                                Maximum="10"
+                                Maximum="0.01"
                                 VerticalAlignment="Center"
                                 Margin="10 0 10 0"
                                 Grid.Row="1"/>

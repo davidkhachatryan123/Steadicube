@@ -74,7 +74,13 @@ namespace Steadicube.ViewModel
                       cube!.HeightBind = settings!.cube?.HeightBind == null ? 30000 : settings.cube.HeightBind;
                       cube!.LengthBind = settings!.cube?.LengthBind == null ? 30000 : settings.cube.LengthBind;
 
-                      Set(obj);
+                      camera = (Camera)(obj as Config).Camera.DataContext;
+                      camera!.position.X = camera.positionBinding.X = cube.Length / 2;
+                      camera!.position.Y = camera.positionBinding.Y = cube.Width / 2;
+                      camera!.position.Z = camera.positionBinding.Z = cube.Height;
+
+
+                      Set(null);
 
                       StartProgram();
                   }));
@@ -104,13 +110,7 @@ namespace Steadicube.ViewModel
             cube.Height = cube.HeightBind;
             cube.Length = cube.LengthBind;
 
-            camera = (Camera)(commandParameter as Config).Camera.DataContext;
-            camera!.position.X = cube.Length / 2;
-            camera!.position.Y = cube.Width / 2;
-            camera!.position.Z = cube.Height;
-
             settings.cube = this.cube;
-            settings.camera = this.camera;
 
             Save(null);
         }

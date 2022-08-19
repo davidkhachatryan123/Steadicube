@@ -2,12 +2,10 @@
 using Steadicube.Classes;
 using Steadicube.Enums;
 using Steadicube.ViewModel;
-using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Windows;
-using System.Windows.Threading;
+
 using DeviceList = System.Collections.Generic.Dictionary<System.Guid, string>;
 
 namespace Steadicube.Model
@@ -83,7 +81,7 @@ namespace Steadicube.Model
 
                 while (true)
                 {
-                    Thread.Sleep(10);
+                    //Thread.Sleep(10);
 
                     Update(joystickMovement);
 

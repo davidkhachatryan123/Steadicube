@@ -26,10 +26,16 @@
                 <ColumnDefinition Width="5" />
                 <ColumnDefinition Width="400" />
             </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
 
             <View:Mode Width="100" Height="50" 
                        VerticalAlignment="Top" HorizontalAlignment="Left"
                        Margin="10 10 0 0"/>
+
+            <View:StatusBar3D Grid.Row="1"/>
 
             <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
 
