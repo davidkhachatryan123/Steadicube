@@ -9,8 +9,12 @@ namespace Steadicube.Model
     public class Serial : INotifyPropertyChanged
     {
         private SerialPort? serialPort;
-        private DispatcherTimer dispatcherTimer = new DispatcherTimer();
-        private bool isSend = false;
+
+        private DispatcherTimer dispatcherTimer_Vectors = new DispatcherTimer();
+        private bool isSend_Vectors = false;
+
+        private DispatcherTimer dispatcherTimer_ServoValue = new DispatcherTimer();
+        private bool isSend_ServoValue = false;
 
 
         private List<string> ports;
@@ -66,9 +70,13 @@ namespace Steadicube.Model
             if (!serialPort.IsOpen)
                 serialPort.Open();
 
-            dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 100);
-            dispatcherTimer.Start();
+            dispatcherTimer_Vectors.Tick += new EventHandler(dispatcherTimer_Vectors_Tick);
+            dispatcherTimer_Vectors.Interval = new TimeSpan(0, 0, 0, 0, 100);
+            dispatcherTimer_Vectors.Start();
+
+            dispatcherTimer_ServoValue.Tick += new EventHandler(dispatcherTimer_ServoValue_Tick);
+            dispatcherTimer_ServoValue.Interval = new TimeSpan(0, 0, 0, 0, 100);
+            dispatcherTimer_ServoValue.Start();
         }
 
         public void ClosePort()
@@ -81,13 +89,13 @@ namespace Steadicube.Model
                 serialPort!.Dispose();
             }
 
-            dispatcherTimer.Stop();
-            isSend = false;
+            dispatcherTimer_Vectors.Stop();
+            isSend_Vectors = false;
         }
 
         public void SendSerial_Vectors(Vector4D vector4D)
         {
-            if (isSend)
+            if (isSend_Vectors)
             {
                 if (serialPort!.IsOpen)
                 {
@@ -96,23 +104,35 @@ namespace Steadicube.Model
                             + "\nC: " + Math.Round(vector4D.C)
                             + "\nD: " + Math.Round(vector4D.D));
 
-                    isSend = false;
+                    isSend_Vectors = false;
                 }
             }
         }
-
-
-        public void SendSerial_ServoValue(string servo, string value)
+        private void dispatcherTimer_Vectors_Tick(object? sender, EventArgs e)
         {
-            if (serialPort!.IsOpen)
-                serialPort!.WriteLine(string.Format("Servo: {0}, {1}", servo, value));
+            isSend_Vectors = true;
         }
 
 
-        private void dispatcherTimer_Tick(object? sender, EventArgs e)
+        public bool SendSerial_ServoValue(string servo, string value, bool force = true)
         {
-            isSend = true;
+            if (isSend_ServoValue || force)
+            {
+                if (serialPort!.IsOpen)
+                    serialPort!.WriteLine(string.Format("Servo: {0}, {1}", servo, value));
+
+                isSend_ServoValue = false;
+
+                return true;
+            }
+
+            return false;
         }
+        private void dispatcherTimer_ServoValue_Tick(object? sender, EventArgs e)
+        {
+            isSend_ServoValue = true;
+        }
+
 
         ~Serial()
         {

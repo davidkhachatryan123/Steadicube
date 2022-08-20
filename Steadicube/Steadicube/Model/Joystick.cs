@@ -34,14 +34,19 @@ namespace Steadicube.Model
             }
         }
 
-        public void SetJoystick(int JoystickIndex)
+        public bool SetJoystick(int JoystickIndex)
         {
+            if (JoystickIndex == -1)
+                return false;
+
             DeleteJoystick();
 
             DirectInput directInput = new DirectInput();
             joystick = new Joystick(directInput, devices!.ElementAt(JoystickIndex).Key);
             joystick.Properties.BufferSize = 128;
             joystick.Acquire();
+
+            return true;
         }
 
         public void DeleteJoystick()
@@ -70,7 +75,7 @@ namespace Steadicube.Model
         }
 
 
-        public void Start(Settings settings)
+        public void Start(Settings settings, CancellationToken ct)
         {
             JoystickMovement joystickMovement = new JoystickMovement();
 
@@ -106,14 +111,16 @@ namespace Steadicube.Model
                                 settings.serial.SendSerial_Vectors(vector4D);
                             });
 
-                        Rec(joystickMovement.Right_Btn_DOWN, settings);
-
-                        LeftButtons(joystickMovement.Left_Btn_UP, joystickMovement.Left_Btn_DOWN, m_Mode, settings);
-
-                        Zoom(joystickMovement, settings);
 
                         MoveSteadi_RightStick(joystickMovement, settings);
+
+                        Rec(joystickMovement.Right_Btn_DOWN, settings);
+                        Zoom(joystickMovement, settings);
+                        LeftButtons(joystickMovement.Left_Btn_UP, joystickMovement.Left_Btn_DOWN, m_Mode, settings);
                     }
+
+                    if (ct.IsCancellationRequested)
+                        return;
                 }
             });
         }
@@ -207,34 +214,36 @@ namespace Steadicube.Model
                 settings.serial.SendSerial_ServoValue("zoom", "-");
         }
 
-        private bool z_0_IsSended = false;
-        private bool x1_0_IsSended = false;
+        private bool first = true;
+        private bool x_0_sended = false;
+        private bool z_0_sended = true;
         private void MoveSteadi_RightStick(JoystickMovement joystickMovement, Settings settings)
         {
-            if (joystickMovement.Right_Stick_Y == 0 && !z_0_IsSended)
+            if (first)
             {
-                settings.serial.SendSerial_ServoValue("z", "0");
+                if (joystickMovement.Right_Stick_X == 0 && !x_0_sended)
+                    x_0_sended = settings.serial.SendSerial_ServoValue("z", "0", false);
+                else if (joystickMovement.Right_Stick_X != 0)
+                {
+                    settings.serial.SendSerial_ServoValue("z", Math.Round(joystickMovement.Right_Stick_X, 1).ToString(), false);
 
-                z_0_IsSended = true;
+                    x_0_sended = false;
+                }
+
+                first = false;
             }
-            else if (joystickMovement.Right_Stick_Y != 0)
+            else
             {
-                settings.serial.SendSerial_ServoValue("z", joystickMovement.Right_Stick_Y.ToString());
+                if (joystickMovement.Right_Stick_Y == 0 && !z_0_sended)
+                    z_0_sended = settings.serial.SendSerial_ServoValue("x1", "0", false);
+                else if (joystickMovement.Right_Stick_Y != 0)
+                {
+                    settings.serial.SendSerial_ServoValue("x1", Math.Round(joystickMovement.Right_Stick_Y, 1).ToString(), false);
 
-                z_0_IsSended = false;
-            }
+                    z_0_sended = false;
+                }
 
-            if (joystickMovement.Right_Stick_X == 0 && !x1_0_IsSended)
-            {
-                settings.serial.SendSerial_ServoValue("x1", "0");
-
-                x1_0_IsSended = true;
-            }
-            else if (joystickMovement.Right_Stick_X != 0)
-            {
-                settings.serial.SendSerial_ServoValue("x1", joystickMovement.Right_Stick_X.ToString());
-
-                x1_0_IsSended = false;
+                first = true;
             }
         }
 

@@ -7,21 +7,22 @@ namespace Steadicube.Model
 {
     public class Settings
     {
-        public string ComPort { get; set; } = string.Empty;
-        public int BaudRate { get; set; }
-        public Guid Joystick { get; set; }
-        public double CameraSpeed { get; set; }
+        public string ComPort { get; set; } = "COM1";
+        public int BaudRate { get; set; } = 9600;
+        public Guid JoystickGUID { get; set; }
+        public double CameraSpeed { get; set; } = 0.001;
 
         public Cube cube { get; set; }
 
         [JsonIgnore]
         public Serial serial { get; set; }
+        [JsonIgnore]
+        public JoyStick joystick { get; set; }
+
 
         public Settings()
         {
-            this.ComPort = "COM1";
-            this.BaudRate = 9600;
-            this.CameraSpeed = 0.001;
+
         }
 
         public Settings(string FilePath)
@@ -34,7 +35,7 @@ namespace Steadicube.Model
 
                     this.ComPort = _settings!.ComPort;
                     this.BaudRate = _settings!.BaudRate;
-                    this.Joystick = _settings!.Joystick;
+                    this.JoystickGUID = _settings!.JoystickGUID;
                     this.CameraSpeed = _settings!.CameraSpeed;
 
                     this.cube = _settings.cube;
@@ -42,11 +43,11 @@ namespace Steadicube.Model
             }
         }
 
-        public Settings(string ComPort, int BaudRate, Guid Joystick, int CameraSpeed, Cube cube)
+        public Settings(string ComPort, int BaudRate, Guid JoystickGUID, int CameraSpeed, Cube cube)
         {
             this.ComPort = ComPort;
             this.BaudRate = BaudRate;
-            this.Joystick = Joystick;
+            this.JoystickGUID = JoystickGUID;
             this.CameraSpeed = CameraSpeed;
 
             this.cube = cube;

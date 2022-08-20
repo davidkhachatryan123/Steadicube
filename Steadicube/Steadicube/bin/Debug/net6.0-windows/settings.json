@@ -1,1 +1,1 @@
-{"ComPort":"COM7","BaudRate":9600,"Joystick":"8f554490-18e9-11ed-8001-444553540000","CameraSpeed":0.0011111111111111113,"cube":{"LengthBind":1000,"WidthBind":1000,"HeightBind":1000,"Width":1000,"Length":1000,"Height":1000}}
+{"ComPort":"COM7","BaudRate":9600,"JoystickGUID":"8f554490-18e9-11ed-8001-444553540000","CameraSpeed":0.001,"cube":{"LengthBind":1000,"WidthBind":1000,"HeightBind":1000,"Width":1000,"Length":1000,"Height":1000}}

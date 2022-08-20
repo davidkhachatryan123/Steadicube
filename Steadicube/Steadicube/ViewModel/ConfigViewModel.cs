@@ -17,10 +17,11 @@ namespace Steadicube.ViewModel
         public static ConfigViewModel configViewModel { get; set; }
 
         public Settings settings;
-        private JoyStick joystick;
-        private DeviceList joystickDeviceList;
         public Cube cube;
         public Model.Camera camera;
+
+        private DeviceList joystickDeviceList;
+
 
         private RelayCommand loadedCommand;
         public RelayCommand LoadedCommand
@@ -35,18 +36,18 @@ namespace Steadicube.ViewModel
 
                       settings = new Settings("settings.json");
 
-                      joystick = new JoyStick();
-                      joystickDeviceList = joystick.Devices;
+                      settings.joystick = new JoyStick();
+                      joystickDeviceList = settings.joystick.Devices;
                       JoystickDevices = joystickDeviceList.Values;
 
-                      if (settings.Joystick != Guid.Empty)
+                      if (settings.JoystickGUID != Guid.Empty)
                           try
                           {
-                              JoystickDevice = joystickDeviceList.Where(device => device.Key == settings.Joystick).First().Value;
+                              JoystickDevice = joystickDeviceList.Where(device => device.Key == settings.JoystickGUID).First().Value;
                           }
                           catch
                           {
-                              settings.Joystick = Guid.Empty;
+                              settings.JoystickGUID = Guid.Empty;
                           }
 
                       SpeedSliderValue = settings.CameraSpeed;
@@ -82,25 +83,29 @@ namespace Steadicube.ViewModel
 
 
                       Set(null);
-
-                      StartProgram();
                   }));
             }
         }
 
-        private bool isStarted = false;
+
+        CancellationTokenSource cancellationTokenSource;
         private void StartProgram()
         {
-            if (settings.Joystick != Guid.Empty && !isStarted)
+            if (cancellationTokenSource != null)
+                cancellationTokenSource.Cancel();
+
+            settings.joystick.DeleteJoystick();
+
+            settings.serial.ClosePort();
+            settings.serial.OpenPort(settings.ComPort, settings.BaudRate);
+
+
+            cancellationTokenSource = new CancellationTokenSource();
+            CancellationToken ct = cancellationTokenSource.Token;
+
+            if (settings.joystick.SetJoystick(settings.joystick.Devices.Keys.ToList().IndexOf(settings.JoystickGUID)))
             {
-                settings.serial.ClosePort();
-                settings.serial.OpenPort(settings.ComPort, settings.BaudRate);
-
-                joystick.SetJoystick(joystick.Devices.Keys.ToList().IndexOf(settings.Joystick));
-
-                joystick.Start(settings);
-
-                isStarted = true;
+                settings.joystick.Start(settings, ct);
             }
         }
 
@@ -211,7 +216,7 @@ namespace Steadicube.ViewModel
 
                 if (joystickDevice != null)
                 {
-                    settings.Joystick = joystickDeviceList.Where(device => device.Value == joystickDevice).First().Key;
+                    settings.JoystickGUID = joystickDeviceList.Where(device => device.Value == joystickDevice).First().Key;
 
                     OnPropertyChanged("JoystickDevice");
                 }
@@ -226,7 +231,7 @@ namespace Steadicube.ViewModel
                 return joystickRefreshBtn ??
                     (joystickRefreshBtn = new RelayCommand(obj =>
                     {
-                        joystickDeviceList = joystick.Devices;
+                        joystickDeviceList = settings.joystick.Devices;
                         JoystickDevices = joystickDeviceList.Values;
                     }));
             }
