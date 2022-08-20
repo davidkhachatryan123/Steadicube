@@ -12,6 +12,18 @@ namespace Steadicube.Model
         public Guid JoystickGUID { get; set; }
         public double CameraSpeed { get; set; } = 0.001;
 
+
+
+        [JsonIgnore]
+        public double Servo_Z_Speed { get; set; } = 0.001;
+
+        [JsonIgnore]
+        public double Servo_X_Speed { get; set; } = 0.001;
+        [JsonIgnore]
+        public double Servo_X_Max { get; set; } = 180;
+
+
+
         public Cube cube { get; set; }
 
         [JsonIgnore]

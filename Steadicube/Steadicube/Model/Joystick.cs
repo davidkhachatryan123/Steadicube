@@ -74,7 +74,6 @@ namespace Steadicube.Model
             }
         }
 
-
         public void Start(Settings settings, CancellationToken ct)
         {
             JoystickMovement joystickMovement = new JoystickMovement();
@@ -112,7 +111,14 @@ namespace Steadicube.Model
                             });
 
 
-                        MoveSteadi_RightStick(joystickMovement, settings);
+                        ConfigViewModel.configViewModel.camera.Rotate(joystickMovement, settings, (z, x1) =>
+                        {
+                            settings.serial.SendSerial_Rotate(Math.Round(z).ToString(), Math.Round(x1).ToString());
+                        });
+
+
+                        //MoveSteadi_RightStick_OnlySendToArduino(joystickMovement, settings);
+
 
                         Rec(joystickMovement.Right_Btn_DOWN, settings);
                         Zoom(joystickMovement, settings);
@@ -124,7 +130,6 @@ namespace Steadicube.Model
                 }
             });
         }
-
 
         private bool isInit = false;
         private bool ApplicationInit(JoystickMovement joystickMovement)
@@ -214,10 +219,10 @@ namespace Steadicube.Model
                 settings.serial.SendSerial_ServoValue("zoom", "-");
         }
 
-        private bool first = true;
+        /*private bool first = true;
         private bool x_0_sended = false;
         private bool z_0_sended = true;
-        private void MoveSteadi_RightStick(JoystickMovement joystickMovement, Settings settings)
+        private void MoveSteadi_RightStick_OnlySendToArduino(JoystickMovement joystickMovement, Settings settings)
         {
             if (first)
             {
@@ -245,7 +250,7 @@ namespace Steadicube.Model
 
                 first = true;
             }
-        }
+        }*/
 
 
 

@@ -13,8 +13,8 @@ namespace Steadicube.Model
         private DispatcherTimer dispatcherTimer_Vectors = new DispatcherTimer();
         private bool isSend_Vectors = false;
 
-        private DispatcherTimer dispatcherTimer_ServoValue = new DispatcherTimer();
-        private bool isSend_ServoValue = false;
+        private DispatcherTimer dispatcherTimer_Rotate = new DispatcherTimer();
+        private bool isSend_Rotate = false;
 
 
         private List<string> ports;
@@ -74,9 +74,9 @@ namespace Steadicube.Model
             dispatcherTimer_Vectors.Interval = new TimeSpan(0, 0, 0, 0, 100);
             dispatcherTimer_Vectors.Start();
 
-            dispatcherTimer_ServoValue.Tick += new EventHandler(dispatcherTimer_ServoValue_Tick);
-            dispatcherTimer_ServoValue.Interval = new TimeSpan(0, 0, 0, 0, 100);
-            dispatcherTimer_ServoValue.Start();
+            dispatcherTimer_Rotate.Tick += new EventHandler(dispatcherTimer_Rotate_Tick);
+            dispatcherTimer_Rotate.Interval = new TimeSpan(0, 0, 0, 0, 100);
+            dispatcherTimer_Rotate.Start();
         }
 
         public void ClosePort()
@@ -114,23 +114,27 @@ namespace Steadicube.Model
         }
 
 
-        public bool SendSerial_ServoValue(string servo, string value, bool force = true)
+        public void SendSerial_ServoValue(string servo, string value)
         {
-            if (isSend_ServoValue || force)
+            if (serialPort!.IsOpen)
+                serialPort!.WriteLine(string.Format("Servo: {0}, {1}", servo, value));
+        }
+
+        public void SendSerial_Rotate(string z, string x1)
+        {
+            if (isSend_Rotate)
             {
                 if (serialPort!.IsOpen)
-                    serialPort!.WriteLine(string.Format("Servo: {0}, {1}", servo, value));
+                {
+                    serialPort!.WriteLine(string.Format("r: {0}, {1}", z, x1));
 
-                isSend_ServoValue = false;
-
-                return true;
+                    isSend_Rotate = false;
+                }
             }
-
-            return false;
         }
-        private void dispatcherTimer_ServoValue_Tick(object? sender, EventArgs e)
+        private void dispatcherTimer_Rotate_Tick(object? sender, EventArgs e)
         {
-            isSend_ServoValue = true;
+            isSend_Rotate = true;
         }
 
 

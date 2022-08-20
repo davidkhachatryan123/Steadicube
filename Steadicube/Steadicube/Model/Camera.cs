@@ -1,15 +1,21 @@
 ﻿using Steadicube.Classes;
 using Steadicube.Enums;
 using Steadicube.ViewModel;
+using System.Diagnostics;
 using System.Windows.Media.Media3D;
 
 namespace Steadicube.Model
 {
     public class Camera
     {
-        public readonly double width = 200;
-        public readonly double length = 200;
-        public readonly double height = 200;
+        public readonly double width = 0;
+        public readonly double length = 0;
+        public readonly double height = 0;
+
+
+        public Position rotation { get; set; } = new Position();
+        public Position rotation1 { get; set; } = new Position();
+
 
         public Position position { get; set; } = new Position();
         public Position positionBinding { get; set; } = new Position();
@@ -58,22 +64,21 @@ namespace Steadicube.Model
                         position.Z = cube.Height - height / 2;
                     }
                 }
-
-                StatusBar3DViewModel.statusBar3DViewModel.vector3D = new Vector3D(
-                    Math.Round(position.X, 2),
-                    Math.Round(position.Y, 2),
-                    Math.Round(position.Z, 2));
-
-
-                sendArduino.Invoke(GetVectors(StatusBar3DViewModel.statusBar3DViewModel.vector3D, cube));
             }
             else if (mode == S_Mode.S2)
             {
 
             }
+
+
+            StatusBar3DViewModel.statusBar3DViewModel.vector3D = new Vector3D(
+                    Math.Round(position.X, 2),
+                    Math.Round(position.Y, 2),
+                    Math.Round(position.Z, 2));
+
+
+            sendArduino.Invoke(GetVectors(StatusBar3DViewModel.statusBar3DViewModel.vector3D, cube));
         }
-
-
         private Vector4D GetVectors(Vector3D cameraPos, Cube cube)
         {
             return new Vector4D
@@ -99,6 +104,43 @@ namespace Steadicube.Model
                 Math.Pow(0 - (cameraPos.Z - height / 2), 2)
                 )
             };
+        }
+
+
+        public void Rotate(JoystickMovement joystickMovement, Settings settings, Action<double, double> sendArduino)
+        {
+            if (joystickMovement.Right_Stick_X > 0)
+            {
+                if (rotation.Z + Math.Abs(joystickMovement.Right_Stick_X * settings.Servo_Z_Speed) < 360)
+                    rotation.Z += Math.Abs(joystickMovement.Right_Stick_X * settings.Servo_Z_Speed);
+                else
+                    rotation.Z = 0;
+            }
+            else
+            {
+                if (rotation.Z - Math.Abs(joystickMovement.Right_Stick_X * settings.Servo_Z_Speed) > 0)
+                    rotation.Z -= Math.Abs(joystickMovement.Right_Stick_X * settings.Servo_Z_Speed);
+                else
+                    rotation.Z = 359;
+            }
+
+
+            if (joystickMovement.Right_Stick_Y > 0)
+            {
+                if (rotation1.X + Math.Abs(joystickMovement.Right_Stick_Y * settings.Servo_X_Speed) <= settings.Servo_X_Max)
+                    rotation1.X += Math.Abs(joystickMovement.Right_Stick_Y * settings.Servo_X_Speed);
+                else
+                    rotation1.X = settings.Servo_X_Max;
+            }
+            else
+            {
+                if (rotation1.X - Math.Abs(joystickMovement.Right_Stick_Y * settings.Servo_X_Speed) >= 0)
+                    rotation1.X -= Math.Abs(joystickMovement.Right_Stick_Y * settings.Servo_X_Speed);
+                else
+                    rotation1.X = 0;
+            }
+
+            sendArduino.Invoke(rotation.Z, rotation1.X);
         }
     }
 }
