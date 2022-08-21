@@ -21,6 +21,8 @@ namespace Steadicube.Model
         public double Servo_X_Speed { get; set; } = 0.001;
         [JsonIgnore]
         public double Servo_X_Max { get; set; } = 180;
+        [JsonIgnore]
+        public double Servo_X_Center { get; set; } = 90;
 
 
 

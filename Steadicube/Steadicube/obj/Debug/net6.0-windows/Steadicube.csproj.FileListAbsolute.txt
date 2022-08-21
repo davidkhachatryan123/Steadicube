@@ -130,3 +130,5 @@ C:\Users\david\Desktop\Steadicube\Steadicube\Steadicube\obj\Debug\net6.0-windows
 C:\Users\david\Desktop\Steadicube\Steadicube\Steadicube\obj\Debug\net6.0-windows\Steadicube.pdb
 C:\Users\david\Desktop\Steadicube\Steadicube\Steadicube\obj\Debug\net6.0-windows\Steadicube.genruntimeconfig.cache
 C:\Users\david\Desktop\Steadicube\Steadicube\Steadicube\obj\Debug\net6.0-windows\ref\Steadicube.dll
+C:\Users\david\Desktop\Steadicube\Steadicube\Steadicube\obj\Debug\net6.0-windows\Tests\X_Y.g.cs
+C:\Users\david\Desktop\Steadicube\Steadicube\Steadicube\obj\Debug\net6.0-windows\Tests\X_Y.baml

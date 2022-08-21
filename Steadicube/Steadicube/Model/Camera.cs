@@ -22,6 +22,9 @@ namespace Steadicube.Model
 
         public void MoveCamera(JoystickMovement joyStickMovement, Cube cube, S_Mode mode, Settings settings, Action<Vector4D> sendArduino)
         {
+            rotation1.X = 90;
+            rotation.Z = 0;
+
             if (mode == S_Mode.S1)
             {
                 if (position.X + joyStickMovement.Left_Stick_X * settings.CameraSpeed >= length / 2
@@ -67,7 +70,26 @@ namespace Steadicube.Model
             }
             else if (mode == S_Mode.S2)
             {
+                if ((position.X >= 0 && position.X <= cube.Length)
+                    && (position.Y >= 0 && position.Y <= cube.Width))
+                {
+                    position.X += (settings.CameraSpeed * joyStickMovement.Left_Stick_Y) * Math.Cos(rotation.Z);
+                    position.Y -= (settings.CameraSpeed * joyStickMovement.Left_Stick_Y) * Math.Sin(rotation.Z);
 
+                    position.X += (settings.CameraSpeed * joyStickMovement.Left_Stick_X) * Math.Cos(rotation.Z);
+                    position.Y += (settings.CameraSpeed * joyStickMovement.Left_Stick_X) * Math.Sin(rotation.Z);
+                }
+                else
+                {
+                    if (position.X <= 0)
+                        position.X = 0;
+                    if (position.X >= cube.Length)
+                        position.X = cube.Length;
+                    if (position.Y <= 0)
+                        position.Y = 0;
+                    if (position.Y >= cube.Width)
+                        position.Y = cube.Width;
+                }
             }
 
 
