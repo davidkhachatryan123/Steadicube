@@ -61,7 +61,7 @@ namespace Steadicube.Tests {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Steadicube;component/tests/x_y.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Steadicube;V1.0.0.0;component/tests/x_y.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Tests\X_Y.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

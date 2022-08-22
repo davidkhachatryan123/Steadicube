@@ -85,9 +85,9 @@ namespace Steadicube.Model
                 rotatedPosition.Z = position.Z;
 
 
-                rotatedPosition.X += position.X;
-                rotatedPosition.Y += position.Y * Math.Cos(rotation1.X) - position.Z * Math.Sin(rotation1.X);
-                rotatedPosition.Z += position.Y * Math.Sin(rotation1.X) + position.Z * Math.Cos(rotation1.X);
+                rotatedPosition.X = rotatedPosition.X;
+                rotatedPosition.Y = rotatedPosition.Y * Math.Cos(rotation1.X) - rotatedPosition.Z * Math.Sin(rotation1.X);
+                rotatedPosition.Z = rotatedPosition.Y * Math.Sin(rotation1.X) + rotatedPosition.Z * Math.Cos(rotation1.X);
 
                 if (!running)
                 {

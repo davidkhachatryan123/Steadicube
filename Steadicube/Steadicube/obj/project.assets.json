@@ -5214,19 +5214,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\davidkhachatryan\\.nuget\\packages\\": {}
+    "C:\\Users\\david\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\davidkhachatryan\\Desktop\\Steadicube\\Steadicube\\Steadicube\\Steadicube.csproj",
+      "projectUniqueName": "C:\\Users\\david\\Desktop\\Steadicube\\Steadicube\\Steadicube\\Steadicube.csproj",
       "projectName": "Steadicube",
-      "projectPath": "C:\\Users\\davidkhachatryan\\Desktop\\Steadicube\\Steadicube\\Steadicube\\Steadicube.csproj",
-      "packagesPath": "C:\\Users\\davidkhachatryan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\davidkhachatryan\\Desktop\\Steadicube\\Steadicube\\Steadicube\\obj\\",
+      "projectPath": "C:\\Users\\david\\Desktop\\Steadicube\\Steadicube\\Steadicube\\Steadicube.csproj",
+      "packagesPath": "C:\\Users\\david\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\david\\Desktop\\Steadicube\\Steadicube\\Steadicube\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\davidkhachatryan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\david\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

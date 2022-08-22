@@ -58,7 +58,7 @@ namespace Steadicube.View {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Steadicube;component/view/mode.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Steadicube;V1.0.0.0;component/view/mode.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\View\Mode.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
