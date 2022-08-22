@@ -10,6 +10,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Dragablz" Version="0.0.3.223" />
+		<PackageReference Include="M2Mqtt" Version="4.3.0" />
 		<PackageReference Include="MaterialDesignThemes" Version="4.5.0" />
 		<PackageReference Include="SharpDX.DirectInput" Version="4.2.0" />
 		<PackageReference Include="System.IO.Ports" Version="6.0.0" />

@@ -5,7 +5,7 @@ using Steadicube.ViewModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
-
+using uPLibrary.Networking.M2Mqtt;
 using DeviceList = System.Collections.Generic.Dictionary<System.Guid, string>;
 
 namespace Steadicube.Model
@@ -82,6 +82,11 @@ namespace Steadicube.Model
             {
                 M_Mode m_Mode = M_Mode.M1;
                 S_Mode s_Mode = S_Mode.S1;
+
+
+                settings.client = new MqttClient(settings.BrokerAddress);
+                settings.client.Connect(settings.clientId);
+
 
                 while (true)
                 {

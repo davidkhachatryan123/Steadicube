@@ -2,11 +2,19 @@
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using uPLibrary.Networking.M2Mqtt;
 
 namespace Steadicube.Model
 {
     public class Settings
     {
+        public MqttClient client;
+
+        public readonly string clientId = Guid.NewGuid().ToString();
+        public readonly string BrokerAddress = "192.168.10.185";
+
+
+
         public string ComPort { get; set; } = "COM1";
         public int BaudRate { get; set; } = 9600;
         public Guid JoystickGUID { get; set; }

@@ -11,6 +11,15 @@
           "lib/netcoreapp3.0/Dragablz.dll": {}
         }
       },
+      "M2Mqtt/4.3.0": {
+        "type": "package",
+        "compile": {
+          "lib/net45/M2Mqtt.Net.dll": {}
+        },
+        "runtime": {
+          "lib/net45/M2Mqtt.Net.dll": {}
+        }
+      },
       "MaterialDesignColors/2.0.6": {
         "type": "package",
         "compile": {
@@ -1642,6 +1651,44 @@
         "src/netcoreapp3.0/obj/Release/net45/GeneratedInternalTypeHelper.g.cs",
         "src/netcoreapp3.0/obj/Release/netcoreapp3.0/.NETCoreApp,Version=v3.0.AssemblyAttributes.cs",
         "src/netcoreapp3.0/obj/Release/netcoreapp3.0/GeneratedInternalTypeHelper.g.cs"
+      ]
+    },
+    "M2Mqtt/4.3.0": {
+      "sha512": "2A1uM20uxuovQKPA0dkZUqD9gUpIMaX7KxdLiVM7IEXdPRL709hGuudHnvlDxm2/6b2LcOjshrYGVG9vdpipag==",
+      "type": "package",
+      "path": "m2mqtt/4.3.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net39-cf/DeployFileList.txt",
+        "lib/net39-cf/M2Mqtt.NetCf39.dll",
+        "lib/net39-cf/M2Mqtt.NetCf39.pdb",
+        "lib/net45/M2Mqtt.Net.dll",
+        "lib/net45/M2Mqtt.Net.pdb",
+        "lib/netmf42/M2Mqtt.NetMf.dll",
+        "lib/netmf42/M2Mqtt.NetMf.pdb",
+        "lib/netmf42/be/M2Mqtt.NetMf.pdb",
+        "lib/netmf42/be/M2Mqtt.NetMf.pdbx",
+        "lib/netmf42/be/M2Mqtt.NetMf.pe",
+        "lib/netmf42/le/M2Mqtt.NetMf.pdb",
+        "lib/netmf42/le/M2Mqtt.NetMf.pdbx",
+        "lib/netmf42/le/M2Mqtt.NetMf.pe",
+        "lib/netmf43/M2Mqtt.NetMf.dll",
+        "lib/netmf43/M2Mqtt.NetMf.pdb",
+        "lib/netmf43/be/M2Mqtt.NetMf.pdb",
+        "lib/netmf43/be/M2Mqtt.NetMf.pdbx",
+        "lib/netmf43/be/M2Mqtt.NetMf.pe",
+        "lib/netmf43/le/M2Mqtt.NetMf.pdb",
+        "lib/netmf43/le/M2Mqtt.NetMf.pdbx",
+        "lib/netmf43/le/M2Mqtt.NetMf.pe",
+        "lib/win81/M2Mqtt.WinRT.dll",
+        "lib/win81/M2Mqtt.WinRT.pdb",
+        "lib/win81/M2Mqtt.WinRT.pri",
+        "lib/wpa81/M2Mqtt.WinRT.dll",
+        "lib/wpa81/M2Mqtt.WinRT.pdb",
+        "lib/wpa81/M2Mqtt.WinRT.pri",
+        "m2mqtt.4.3.0.nupkg.sha512",
+        "m2mqtt.nuspec"
       ]
     },
     "MaterialDesignColors/2.0.6": {
@@ -5159,6 +5206,7 @@
   "projectFileDependencyGroups": {
     "net6.0-windows7.0": [
       "Dragablz >= 0.0.3.223",
+      "M2Mqtt >= 4.3.0",
       "MaterialDesignThemes >= 4.5.0",
       "SharpDX.DirectInput >= 4.2.0",
       "System.IO.Ports >= 6.0.0",
@@ -5166,19 +5214,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\david\\.nuget\\packages\\": {}
+    "C:\\Users\\davidkhachatryan\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\david\\Desktop\\Steadicube\\Steadicube\\Steadicube\\Steadicube.csproj",
+      "projectUniqueName": "C:\\Users\\davidkhachatryan\\Desktop\\Steadicube\\Steadicube\\Steadicube\\Steadicube.csproj",
       "projectName": "Steadicube",
-      "projectPath": "C:\\Users\\david\\Desktop\\Steadicube\\Steadicube\\Steadicube\\Steadicube.csproj",
-      "packagesPath": "C:\\Users\\david\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\david\\Desktop\\Steadicube\\Steadicube\\Steadicube\\obj\\",
+      "projectPath": "C:\\Users\\davidkhachatryan\\Desktop\\Steadicube\\Steadicube\\Steadicube\\Steadicube.csproj",
+      "packagesPath": "C:\\Users\\davidkhachatryan\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\davidkhachatryan\\Desktop\\Steadicube\\Steadicube\\Steadicube\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\david\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\davidkhachatryan\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5207,6 +5255,10 @@
           "Dragablz": {
             "target": "Package",
             "version": "[0.0.3.223, )"
+          },
+          "M2Mqtt": {
+            "target": "Package",
+            "version": "[4.3.0, )"
           },
           "MaterialDesignThemes": {
             "target": "Package",
@@ -5248,6 +5300,16 @@
     }
   },
   "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'M2Mqtt 4.3.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net6.0-windows7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "M2Mqtt",
+      "targetGraphs": [
+        "net6.0-windows7.0"
+      ]
+    },
     {
       "code": "NU1701",
       "level": "Warning",
