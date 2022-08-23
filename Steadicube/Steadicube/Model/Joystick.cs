@@ -84,10 +84,6 @@ namespace Steadicube.Model
                 S_Mode s_Mode = S_Mode.S1;
 
 
-                settings.client = new MqttClient(settings.BrokerAddress);
-                settings.client.Connect(settings.clientId);
-
-
                 while (true)
                 {
                     Update(joystickMovement);
@@ -100,7 +96,7 @@ namespace Steadicube.Model
                             (m_Mode) => { ModeViewModel.modeViewModel.m_Mode = m_Mode; });
 
                         ChangeS_Mode(
-                            joystickMovement.Left_Stick_BTN,
+                            joystickMovement.Left_Btn_LEFT, //Left_Stick_BTN
                             ref s_Mode,
                             (s_Mode) => { ModeViewModel.modeViewModel.s_Mode = s_Mode; });
 

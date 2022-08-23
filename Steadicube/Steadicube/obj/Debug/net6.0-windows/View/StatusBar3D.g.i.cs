@@ -79,7 +79,7 @@ namespace Steadicube.View {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Steadicube;V1.0.0.0;component/view/statusbar3d.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Steadicube;component/view/statusbar3d.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\View\StatusBar3D.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

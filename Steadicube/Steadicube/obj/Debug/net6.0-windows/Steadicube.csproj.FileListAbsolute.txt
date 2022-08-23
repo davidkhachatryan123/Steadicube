@@ -135,3 +135,4 @@ C:\Users\davidkhachatryan\Desktop\Steadicube\Steadicube\Steadicube\obj\Debug\net
 C:\Users\davidkhachatryan\Desktop\Steadicube\Steadicube\Steadicube\obj\Debug\net6.0-windows\Steadicube.pdb
 C:\Users\davidkhachatryan\Desktop\Steadicube\Steadicube\Steadicube\obj\Debug\net6.0-windows\Steadicube.genruntimeconfig.cache
 C:\Users\davidkhachatryan\Desktop\Steadicube\Steadicube\Steadicube\obj\Debug\net6.0-windows\ref\Steadicube.dll
+C:\Users\david\Desktop\Steadicube\Steadicube\Steadicube\bin\Debug\net6.0-windows\M2Mqtt.Net.dll

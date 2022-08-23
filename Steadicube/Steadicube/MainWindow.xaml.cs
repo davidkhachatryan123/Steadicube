@@ -18,7 +18,7 @@ namespace Steadicube
             this.DataContext = new MainWindowViewModel();
 
             x_y = new X_Y();
-            x_y.Show();
+            //x_y.Show();
         }
     }
 }
