@@ -89,13 +89,13 @@ namespace Steadicube.Model
                 double gamma = 0;
 
 
-                if (Mode_2_first)
+                /*if (Mode_2_first)
                 {
                     alfa = -45;
                     betta = -45;
 
                     /*rotatedPosition.X = position.X * Math.Cos(alfa) - position.Y * Math.Sin(alfa);
-                    rotatedPosition.Y = position.X * Math.Sin(alfa) + position.Y * Math.Cos(alfa);*/
+                    rotatedPosition.Y = position.X * Math.Sin(alfa) + position.Y * Math.Cos(alfa);
 
                     double a = position.X * (Math.Cos(alfa) * Math.Cos(gamma) - Math.Sin(alfa) * Math.Cos(betta) * Math.Sin(gamma))
                                       + position.Y * (-Math.Sin(alfa) * Math.Cos(gamma) - Math.Cos(alfa) * Math.Cos(betta) * Math.Sin(gamma))
@@ -112,12 +112,12 @@ namespace Steadicube.Model
 
                     /*rotatedPosition.X = position.X;
                     rotatedPosition.Y = position.Y;
-                    rotatedPosition.Z = position.Z;*/
+                    rotatedPosition.Z = position.Z;
 
                     Mode_2_first = false;
 
                     return;
-                }
+                }*/
 
 
                 if (rotatedPosition.X >= 0)
