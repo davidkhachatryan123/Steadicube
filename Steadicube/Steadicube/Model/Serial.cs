@@ -65,6 +65,9 @@ namespace Steadicube.Model
 
         public void OpenPort(string port, int baud)
         {
+            if (port == null)
+                return;
+
             serialPort = new SerialPort(port, baud, Parity.None, 8, StopBits.One);
 
             if (!serialPort.IsOpen)

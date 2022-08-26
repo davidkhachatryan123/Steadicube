@@ -1,11 +1,10 @@
 ﻿using Steadicube.Classes;
 using Steadicube.Enums;
 using Steadicube.ViewModel;
-using System.Diagnostics;
 using System.Net.Sockets;
+using System.Numerics;
 using System.Text;
 using System.Windows.Media.Media3D;
-using System.Windows.Threading;
 
 namespace Steadicube.Model
 {
@@ -84,11 +83,31 @@ namespace Steadicube.Model
             }
             else if (mode == S_Mode.S2)
             {
-                double alfa = 45;
-                double betta = 45;
-                double gamma = 0;
+                double alfa = Math.PI * 45 / 180;
+                double betta = Math.PI * 45 / 180;
+                double gamma = Math.PI * 0 / 180;
+
+                position.X += joyStickMovement.Left_Stick_X * settings.CameraSpeed;
+                position.Y -= joyStickMovement.Left_Stick_Y * settings.CameraSpeed;
+                position.Z -= joyStickMovement.R2 * settings.CameraSpeed;
+                position.Z -= joyStickMovement.L2 * settings.CameraSpeed;
 
 
+                Matrix4x4 rotationMatix =
+                    Matrix4x4.CreateFromQuaternion(
+                        System.Numerics.Quaternion.CreateFromYawPitchRoll(
+                            (float)alfa,
+                            (float)betta,
+                            (float)gamma
+                            )
+                        );
+
+                Matrix4x4 translationMatrix = new Matrix4x4();
+                translationMatrix.Translation =
+                    Vector3.Normalize(new Vector3((float)position.X, (float)position.Y, (float)position.Z));
+
+
+                Matrix4x4 m = Matrix4x4.Multiply(rotationMatix, translationMatrix);
 
 
 
