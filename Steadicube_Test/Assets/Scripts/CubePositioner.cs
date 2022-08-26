@@ -31,7 +31,7 @@ public class CubePositioner : MonoBehaviour
 
     void Update()
     {
-        transform.position = new Vector3(x, z, y);
+        transform.position = new Vector3(x / 10, z / 10, y / 10);
         transform.eulerAngles = new Vector3(-pitch, yaw, 0);
     }
 
@@ -44,7 +44,6 @@ public class CubePositioner : MonoBehaviour
                 byte[] data = receiver.Receive(ref remoteIp);
 
                 string message = Encoding.Unicode.GetString(data);
-
 
                 if (message.IndexOf('x') != -1)
                     x = float.Parse(message.Substring(2, message.Length - 2));

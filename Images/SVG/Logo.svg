@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW 2021 (64-Bit Оценочная версия) -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="84.9868mm" height="83.1928mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 8602.12 8420.54"
+ xmlns:xlink="http://www.w3.org/1999/xlink"
+ xmlns:xodm="http://www.corel.com/coreldraw/odm/2003">
+ <defs>
+  <font id="FontID0" horiz-adv-x="1124" font-variant="normal" style="fill-rule:nonzero" font-weight="400">
+	<font-face 
+		font-family="Astrolab">
+		<font-face-src>
+			<font-face-name name="Astrolab Regular"/>
+		</font-face-src>
+	</font-face>
+   <missing-glyph><path d="M0 0z"/></missing-glyph>
+   <glyph unicode="A" horiz-adv-x="1124" d="M750 500l0 250 -500 0 0 -250 500 0zm-750 -500l0 874.995 124.995 125.005 750 0 125.005 -125.005 0 -874.995 -250 0 0 250 -500 0 0 -250 -250 0z"/>
+   <glyph unicode="B" horiz-adv-x="1124" d="M750 250l0 124.995 -500 0 0 -124.995 500 0zm0 374.995l0 125.005 -500 0 0 -125.005 500 0zm-750 -624.995l0 1000 874.995 0 125.005 -125.005 0 -250 -125.005 -124.995 125.005 -125.005 0 -250 -125.005 -124.995 -874.995 0z"/>
+   <glyph unicode="C" horiz-adv-x="1124" d="M124.995 0l-124.995 124.995 0 750 124.995 125.005 750 0 125.005 -125.005 0 -250 -250 0 0 125.005 -500 0 0 -500 500 0 0 124.995 250 0 0 -250 -125.005 -124.995 -750 0z"/>
+   <glyph unicode="D" horiz-adv-x="1124" d="M750 250l0 500 -500 0 0 -500 500 0zm-750 -250l0 1000 874.995 0 125.005 -125.005 0 -750 -125.005 -124.995 -874.995 0z"/>
+   <glyph unicode="E" horiz-adv-x="1124" d="M0 0l0 1000 1000 0 0 -250 -750 0 0 -125.005 624.995 0 0 -250 -624.995 0 0 -124.995 750 0 0 -250 -1000 0z"/>
+   <glyph unicode="I" horiz-adv-x="374" d="M0 0l0 1000 250 0 0 -1000 -250 0z"/>
+   <glyph unicode="S" horiz-adv-x="1124" d="M0 0l0 250 750 0 0 124.995 -625.005 0 -124.995 125.005 0 374.995 124.995 125.005 875.005 0 0 -250 -750 0 0 -125.005 624.995 0 125.005 -124.995 0 -375.005 -125.005 -124.995 -874.995 0z"/>
+   <glyph unicode="T" horiz-adv-x="1124" d="M374.995 0l0 750 -374.995 0 0 250 1000 0 0 -250 -375.005 0 0 -750 -250 0z"/>
+   <glyph unicode="U" horiz-adv-x="1124" d="M124.995 0l-124.995 124.995 0 750 124.995 125.005 125.005 0 0 -750 500 0 0 750 250 0 0 -875.005 -125.005 -124.995 -750 0z"/>
+  </font>
+  <style type="text/css">
+   <![CDATA[
+    @font-face { font-family:"Astrolab";font-variant:normal;font-weight:normal;src:url("#FontID0") format(svg)}
+    .fil1 {fill:black}
+    .fil0 {fill:black}
+    .fnt0 {font-weight:normal;font-size:982.33px;font-family:'Astrolab'}
+   ]]>
+  </style>
+ </defs>
+ <g id="Слой_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g id="_2349005217200">
+   <polygon class="fil0" points="6554.74,3077.72 6554.74,6373.16 3259.3,6373.16 "/>
+   <polygon class="fil0" points="8602.12,1030.34 8602.12,8420.54 1211.92,8420.54 2372.6,7259.86 7441.46,7259.86 7441.46,2191.01 "/>
+   <polygon class="fil0" points="1211.7,1030.12 5106.77,1030.12 3946.1,2190.79 2372.38,2190.79 2372.38,3764.51 1211.7,4925.19 "/>
+  </g>
+  <g transform="matrix(0.707107 -0.707107 0.707107 0.707107 -9627.58 3675.31)">
+   <text x="4249.34" y="10225.66"  class="fil1 fnt0">STEADIC</text>
+   <text x="13458.67" y="10225.66"  class="fil1 fnt0">E</text>
+   <text x="11248.43" y="10225.66"  class="fil1 fnt0">UB</text>
+  </g>
+ </g>
+</svg>
