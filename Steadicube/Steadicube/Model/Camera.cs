@@ -14,12 +14,8 @@ namespace Steadicube.Model
         public readonly double length = 0;
         public readonly double height = 0;
 
-        private Position rotatedPosition = new Position();
-        private Position ancacgnacac = new Position();
-
-
         public Position rotation { get; set; } = new Position();
-        public Position rotation1 { get; set; } = new Position();
+        public Position rotationForArduino { get; set; } = new Position();
 
         public Position position { get; set; } = new Position();
         public Position positionBinding { get; set; } = new Position();
@@ -74,69 +70,67 @@ namespace Steadicube.Model
                         position.Z = cube.Height - height / 2;
                     }
                 }
-
-
-                StatusBar3DViewModel.statusBar3DViewModel.vector3D = new Vector3D(
-                    Math.Round(position.X, 2),
-                    Math.Round(position.Y, 2),
-                    Math.Round(position.Z, 2));
             }
             else if (mode == S_Mode.S2)
             {
-                double alfa = Math.PI * 45 / 180;
-                double betta = Math.PI * 45 / 180;
-                double gamma = Math.PI * 0 / 180;
+                float yaw = (float)(Math.PI * -rotation.Z / 180); // -rotation.Z
+                float pitch = (float)(Math.PI * rotation.X / 180); // rotation.X
 
-                position.X += joyStickMovement.Left_Stick_X * settings.CameraSpeed;
-                position.Y -= joyStickMovement.Left_Stick_Y * settings.CameraSpeed;
-                position.Z -= joyStickMovement.R2 * settings.CameraSpeed;
-                position.Z -= joyStickMovement.L2 * settings.CameraSpeed;
+                Vector3 translationVector = new Vector3(
+                    (float)(joyStickMovement.Left_Stick_X),
+                    (float)(-joyStickMovement.Left_Stick_Y),
+                    (float)(-joyStickMovement.R2 - joyStickMovement.L2));
 
-
-                Matrix4x4 rotationMatix =
-                    Matrix4x4.CreateFromQuaternion(
-                        System.Numerics.Quaternion.CreateFromYawPitchRoll(
-                            (float)alfa,
-                            (float)betta,
-                            (float)gamma
-                            )
-                        );
-
-                Matrix4x4 translationMatrix = new Matrix4x4();
-                translationMatrix.Translation =
-                    Vector3.Normalize(new Vector3((float)position.X, (float)position.Y, (float)position.Z));
+                translationVector = Vector3.Normalize(translationVector);
 
 
-                Matrix4x4 m = Matrix4x4.Multiply(rotationMatix, translationMatrix);
+                Matrix4x4 translationMatrix = Matrix4x4.CreateTranslation(translationVector);
+
+                Matrix4x4 x_rotationMatrix = Matrix4x4.CreateRotationX(pitch);
+                Matrix4x4 z_rotationMatrix = Matrix4x4.CreateRotationZ(yaw);
+
+                Matrix4x4 result;
+                result = Matrix4x4.Multiply(translationMatrix, x_rotationMatrix);
+                result = Matrix4x4.Multiply(result, z_rotationMatrix);
+
+
+                Vector3 newAddingVector = result.Translation;
+
+                position.X += float.IsNaN(newAddingVector.X) ? 0 : newAddingVector.X * settings.CameraSpeed;
+                position.Y += float.IsNaN(newAddingVector.Y) ? 0 : newAddingVector.Y * settings.CameraSpeed;
+                position.Z += float.IsNaN(newAddingVector.Z) ? 0 : newAddingVector.Z * settings.CameraSpeed;
 
 
 
-                if (!running)
+                /*if (!running)
                 {
                     running = true;
 
                     sender = new UdpClient();
                 }
 
-                string message1 = "x:" + rotatedPosition.X;
-                string message2 = "y:" + rotatedPosition.Y;
-                string message3 = "z:" + rotatedPosition.Z;
+                string message1 = "x:" + position.X;
+                string message2 = "y:" + position.Y;
+                string message3 = "z:" + position.Z;
+                string message4 = "a:" + rotation.Z;
+                string message5 = "p:" + rotation.X;
                 byte[] data1 = Encoding.Unicode.GetBytes(message1);
                 byte[] data2 = Encoding.Unicode.GetBytes(message2);
                 byte[] data3 = Encoding.Unicode.GetBytes(message3);
+                byte[] data4 = Encoding.Unicode.GetBytes(message4);
+                byte[] data5 = Encoding.Unicode.GetBytes(message5);
 
-                sender.Send(data1, data1.Length, "127.0.0.1", 8005);
-                sender.Send(data2, data2.Length, "127.0.0.1", 8005);
-                sender.Send(data3, data3.Length, "127.0.0.1", 8005);
-
-
-
-                StatusBar3DViewModel.statusBar3DViewModel.vector3D = new Vector3D(
-                    Math.Round(rotatedPosition.X, 2),
-                    Math.Round(rotatedPosition.Y, 2),
-                    Math.Round(rotatedPosition.Z, 2));
+                sender.Send(data1, data1.Length, "127.0.0.1", 8004);
+                sender.Send(data2, data2.Length, "127.0.0.1", 8004);
+                sender.Send(data3, data3.Length, "127.0.0.1", 8004);
+                sender.Send(data4, data4.Length, "127.0.0.1", 8004);
+                sender.Send(data5, data5.Length, "127.0.0.1", 8004);*/
             }
 
+            StatusBar3DViewModel.statusBar3DViewModel.vector3D = new Vector3D(
+                    Math.Round(position.X, 2),
+                    Math.Round(position.Y, 2),
+                    Math.Round(position.Z, 2));
 
             sendArduino.Invoke(GetVectors(StatusBar3DViewModel.statusBar3DViewModel.vector3D, cube));
         }
@@ -189,20 +183,22 @@ namespace Steadicube.Model
 
             if (joystickMovement.Right_Stick_Y > 0)
             {
-                if (rotation1.X + Math.Abs(joystickMovement.Right_Stick_Y * settings.Servo_X_Speed) <= settings.Servo_X_Max)
-                    rotation1.X += Math.Abs(joystickMovement.Right_Stick_Y * settings.Servo_X_Speed);
+                if (rotationForArduino.X + Math.Abs(joystickMovement.Right_Stick_Y * settings.Servo_X_Speed) <= settings.Servo_X_Max)
+                    rotationForArduino.X += Math.Abs(joystickMovement.Right_Stick_Y * settings.Servo_X_Speed);
                 else
-                    rotation1.X = settings.Servo_X_Max;
+                    rotationForArduino.X = settings.Servo_X_Max;
             }
             else
             {
-                if (rotation1.X - Math.Abs(joystickMovement.Right_Stick_Y * settings.Servo_X_Speed) >= 0)
-                    rotation1.X -= Math.Abs(joystickMovement.Right_Stick_Y * settings.Servo_X_Speed);
+                if (rotationForArduino.X - Math.Abs(joystickMovement.Right_Stick_Y * settings.Servo_X_Speed) >= 0)
+                    rotationForArduino.X -= Math.Abs(joystickMovement.Right_Stick_Y * settings.Servo_X_Speed);
                 else
-                    rotation1.X = 0;
+                    rotationForArduino.X = 0;
             }
 
-            sendArduino.Invoke(rotation.Z, rotation1.X);
+            rotation.X = settings.Servo_X_Center - rotationForArduino.X; // convert arduino angle to rotation angle for pitch
+
+            sendArduino.Invoke(rotation.Z, rotationForArduino.X);
         }
     }
 }

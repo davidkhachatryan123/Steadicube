@@ -80,7 +80,7 @@ namespace Steadicube.ViewModel
                       camera!.position.X = camera.positionBinding.X = cube.LengthBind / 2;
                       camera!.position.Y = camera.positionBinding.Y = cube.WidthBind / 2;
                       camera!.position.Z = camera.positionBinding.Z = cube.HeightBind;
-
+                      camera!.rotationForArduino = new Position(settings.Servo_X_Center, 0, 0);
 
                       Set(null);
                   }));

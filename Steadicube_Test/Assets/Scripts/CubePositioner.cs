@@ -17,6 +17,9 @@ public class CubePositioner : MonoBehaviour
     float y = 0;
     float z = 0;
 
+    float yaw = 0;
+    float pitch = 0;
+
     void Start()
     {
         receiver = new UdpClient(localPort);
@@ -29,6 +32,7 @@ public class CubePositioner : MonoBehaviour
     void Update()
     {
         transform.position = new Vector3(x, z, y);
+        transform.eulerAngles = new Vector3(-pitch, yaw, 0);
     }
 
     private void ReceiveMessages()
@@ -43,24 +47,15 @@ public class CubePositioner : MonoBehaviour
 
 
                 if (message.IndexOf('x') != -1)
-                {
                     x = float.Parse(message.Substring(2, message.Length - 2));
-
-                    //Debug.Log(x);
-                }
                 else if (message.IndexOf('y') != -1)
-                {
                     y = float.Parse(message.Substring(2, message.Length - 2));
-
-                    //Debug.Log(y);
-                }
                 else if (message.IndexOf('z') != -1)
-                {
                     z = float.Parse(message.Substring(2, message.Length - 2));
-
-                    //Debug.Log(z);
-                }
-
+                else if (message.IndexOf('a') != -1)
+                    yaw = float.Parse(message.Substring(2, message.Length - 2));
+                else if (message.IndexOf('p') != -1)
+                    pitch = float.Parse(message.Substring(2, message.Length - 2));
             }
         }
         catch (Exception ex)
