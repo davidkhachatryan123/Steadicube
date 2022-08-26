@@ -323,7 +323,10 @@ namespace Steadicube.ViewModel
 
         private async void Save(object commandParameter)
         {
-            using (FileStream fs = new FileStream("settings.json", FileMode.OpenOrCreate))
+            if (File.Exists("settings.json"))
+                File.Delete("settings.json");
+
+            using (FileStream fs = new FileStream("settings.json", FileMode.Create))
             {
                 await JsonSerializer.SerializeAsync<Settings>(fs, settings);
             }

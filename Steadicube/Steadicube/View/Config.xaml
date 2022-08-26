@@ -277,7 +277,7 @@
                         <Slider Foreground="#3CAB76"
                                 Value="{Binding SpeedSliderValue}"
                                 Minimum="0"
-                                Maximum="0.01"
+                                Maximum="0.1"
                                 VerticalAlignment="Center"
                                 Margin="10 0 10 0"
                                 Grid.Row="1"/>

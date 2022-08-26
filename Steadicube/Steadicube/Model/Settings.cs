@@ -11,15 +11,15 @@ namespace Steadicube.Model
         public string ComPort { get; set; } = "COM1";
         public int BaudRate { get; set; } = 9600;
         public Guid JoystickGUID { get; set; }
-        public double CameraSpeed { get; set; } = 0.001;
+        public double CameraSpeed { get; set; } = 0.05;
 
 
 
         [JsonIgnore]
-        public double Servo_Z_Speed { get; set; } = 0.001;
+        public double Servo_Z_Speed { get; set; } = 0.05;
 
         [JsonIgnore]
-        public double Servo_X_Speed { get; set; } = 0.001;
+        public double Servo_X_Speed { get; set; } = 0.05;
         [JsonIgnore]
         public double Servo_X_Max { get; set; } = 180;
         [JsonIgnore]

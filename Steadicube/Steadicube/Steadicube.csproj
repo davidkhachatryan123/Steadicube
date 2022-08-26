@@ -6,7 +6,12 @@
 		<Nullable>enable</Nullable>
 		<UseWPF>true</UseWPF>
 		<ImplicitUsings>enable</ImplicitUsings>
+		<ApplicationIcon>Logo.ico</ApplicationIcon>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <Content Include="Logo.ico" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Dragablz" Version="0.0.3.223" />

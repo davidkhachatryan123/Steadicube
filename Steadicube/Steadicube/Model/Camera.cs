@@ -10,9 +10,9 @@ namespace Steadicube.Model
 {
     public class Camera
     {
-        public readonly double width = 0;
-        public readonly double length = 0;
-        public readonly double height = 0;
+        public readonly double width = 200;
+        public readonly double length = 200;
+        public readonly double height = 200;
 
         public Position rotation { get; set; } = new Position();
         public Position rotationForArduino { get; set; } = new Position();
@@ -24,15 +24,15 @@ namespace Steadicube.Model
         bool running = false;
 
         bool Mode_2_first = false;
-        public void MoveCamera(JoystickMovement joyStickMovement, Cube cube, S_Mode mode, Settings settings, Action<Vector4D> sendArduino)
+        public void MoveCamera(JoystickMovement joyStickMovement, Cube cube, S_Mode mode, Settings settings, Action<Vector4D> sendArduino, double deltaTime)
         {
             if (mode == S_Mode.S1)
             {
                 Mode_2_first = true;
 
-                if (position.X + joyStickMovement.Left_Stick_X * settings.CameraSpeed >= length / 2
-                    && position.X + joyStickMovement.Left_Stick_X * settings.CameraSpeed <= cube.Length - length / 2)
-                    position.X += joyStickMovement.Left_Stick_X * settings.CameraSpeed;
+                if (position.X + joyStickMovement.Left_Stick_X * settings.CameraSpeed * deltaTime >= length / 2
+                    && position.X + joyStickMovement.Left_Stick_X * settings.CameraSpeed * deltaTime <= cube.Length - length / 2)
+                    position.X += joyStickMovement.Left_Stick_X * settings.CameraSpeed * deltaTime;
                 else
                 {
                     if (position.X > cube.Length / 2)
@@ -41,9 +41,9 @@ namespace Steadicube.Model
                         position.X = length / 2;
                 }
 
-                if (position.Y - joyStickMovement.Left_Stick_Y * settings.CameraSpeed >= width / 2
-                    && position.Y - joyStickMovement.Left_Stick_Y * settings.CameraSpeed <= cube.Width - width / 2)
-                    position.Y -= joyStickMovement.Left_Stick_Y * settings.CameraSpeed;
+                if (position.Y - joyStickMovement.Left_Stick_Y * settings.CameraSpeed * deltaTime >= width / 2
+                    && position.Y - joyStickMovement.Left_Stick_Y * settings.CameraSpeed * deltaTime <= cube.Width - width / 2)
+                    position.Y -= joyStickMovement.Left_Stick_Y * settings.CameraSpeed * deltaTime;
                 else
                 {
                     if (position.Y > cube.Width / 2)
@@ -53,16 +53,16 @@ namespace Steadicube.Model
                 }
 
 
-                if (position.Z - joyStickMovement.R2 * settings.CameraSpeed >= height / 2)
-                    position.Z -= joyStickMovement.R2 * settings.CameraSpeed;
+                if (position.Z - joyStickMovement.R2 * settings.CameraSpeed * deltaTime >= height / 2)
+                    position.Z -= joyStickMovement.R2 * settings.CameraSpeed * deltaTime;
                 else
                 {
                     if (position.Z < cube.Height / 2)
                         position.Z = height / 2;
                 }
 
-                if (position.Z - joyStickMovement.L2 * settings.CameraSpeed <= cube.Height - height / 2)
-                    position.Z -= joyStickMovement.L2 * settings.CameraSpeed;
+                if (position.Z - joyStickMovement.L2 * settings.CameraSpeed * deltaTime <= cube.Height - height / 2)
+                    position.Z -= joyStickMovement.L2 * settings.CameraSpeed * deltaTime;
                 else
                 {
                     if (position.Z > cube.Height / 2)
@@ -96,36 +96,47 @@ namespace Steadicube.Model
 
                 Vector3 newAddingVector = result.Translation;
 
-                position.X += float.IsNaN(newAddingVector.X) ? 0 : newAddingVector.X * settings.CameraSpeed;
-                position.Y += float.IsNaN(newAddingVector.Y) ? 0 : newAddingVector.Y * settings.CameraSpeed;
-                position.Z += float.IsNaN(newAddingVector.Z) ? 0 : newAddingVector.Z * settings.CameraSpeed;
 
+                if (position.X + newAddingVector.X * settings.CameraSpeed * deltaTime >= length / 2
+                    && position.X + newAddingVector.X * settings.CameraSpeed * deltaTime <= cube.Length - length / 2)
+                    position.X += float.IsNaN(newAddingVector.X) ? 0 : newAddingVector.X * settings.CameraSpeed * deltaTime;
 
+                if (position.Y + newAddingVector.Y * settings.CameraSpeed * deltaTime >= width / 2
+                    && position.Y + newAddingVector.Y * settings.CameraSpeed * deltaTime <= cube.Width - width / 2)
+                    position.Y += float.IsNaN(newAddingVector.Y) ? 0 : newAddingVector.Y * settings.CameraSpeed * deltaTime;
 
-                /*if (!running)
-                {
-                    running = true;
-
-                    sender = new UdpClient();
-                }
-
-                string message1 = "x:" + position.X;
-                string message2 = "y:" + position.Y;
-                string message3 = "z:" + position.Z;
-                string message4 = "a:" + rotation.Z;
-                string message5 = "p:" + rotation.X;
-                byte[] data1 = Encoding.Unicode.GetBytes(message1);
-                byte[] data2 = Encoding.Unicode.GetBytes(message2);
-                byte[] data3 = Encoding.Unicode.GetBytes(message3);
-                byte[] data4 = Encoding.Unicode.GetBytes(message4);
-                byte[] data5 = Encoding.Unicode.GetBytes(message5);
-
-                sender.Send(data1, data1.Length, "127.0.0.1", 8004);
-                sender.Send(data2, data2.Length, "127.0.0.1", 8004);
-                sender.Send(data3, data3.Length, "127.0.0.1", 8004);
-                sender.Send(data4, data4.Length, "127.0.0.1", 8004);
-                sender.Send(data5, data5.Length, "127.0.0.1", 8004);*/
+                if (position.Z + newAddingVector.Z * settings.CameraSpeed * deltaTime >= height / 2
+                    && position.Z + newAddingVector.Z * settings.CameraSpeed * deltaTime <= cube.Height - height / 2)
+                    position.Z += float.IsNaN(newAddingVector.Z) ? 0 : newAddingVector.Z * settings.CameraSpeed * deltaTime;
             }
+
+
+
+            if (!running)
+            {
+                running = true;
+
+                sender = new UdpClient();
+            }
+
+            string message1 = "x:" + position.X;
+            string message2 = "y:" + position.Y;
+            string message3 = "z:" + position.Z;
+            string message4 = "a:" + rotation.Z;
+            string message5 = "p:" + rotation.X;
+            byte[] data1 = Encoding.Unicode.GetBytes(message1);
+            byte[] data2 = Encoding.Unicode.GetBytes(message2);
+            byte[] data3 = Encoding.Unicode.GetBytes(message3);
+            byte[] data4 = Encoding.Unicode.GetBytes(message4);
+            byte[] data5 = Encoding.Unicode.GetBytes(message5);
+
+            sender.Send(data1, data1.Length, "127.0.0.1", 8004);
+            sender.Send(data2, data2.Length, "127.0.0.1", 8004);
+            sender.Send(data3, data3.Length, "127.0.0.1", 8004);
+            sender.Send(data4, data4.Length, "127.0.0.1", 8004);
+            sender.Send(data5, data5.Length, "127.0.0.1", 8004);
+
+
 
             StatusBar3DViewModel.statusBar3DViewModel.vector3D = new Vector3D(
                     Math.Round(position.X, 2),
@@ -163,19 +174,19 @@ namespace Steadicube.Model
         }
 
 
-        public void Rotate(JoystickMovement joystickMovement, Settings settings, Action<double, double> sendArduino)
+        public void Rotate(JoystickMovement joystickMovement, Settings settings, Action<double, double> sendArduino, double deltaTime)
         {
             if (joystickMovement.Right_Stick_X > 0)
             {
-                if (rotation.Z + Math.Abs(joystickMovement.Right_Stick_X * settings.Servo_Z_Speed) < 360)
-                    rotation.Z += Math.Abs(joystickMovement.Right_Stick_X * settings.Servo_Z_Speed);
+                if (rotation.Z + Math.Abs(joystickMovement.Right_Stick_X * settings.Servo_Z_Speed * deltaTime) < 360)
+                    rotation.Z += Math.Abs(joystickMovement.Right_Stick_X * settings.Servo_Z_Speed * deltaTime);
                 else
                     rotation.Z = 0;
             }
             else
             {
-                if (rotation.Z - Math.Abs(joystickMovement.Right_Stick_X * settings.Servo_Z_Speed) > 0)
-                    rotation.Z -= Math.Abs(joystickMovement.Right_Stick_X * settings.Servo_Z_Speed);
+                if (rotation.Z - Math.Abs(joystickMovement.Right_Stick_X * settings.Servo_Z_Speed * deltaTime) > 0)
+                    rotation.Z -= Math.Abs(joystickMovement.Right_Stick_X * settings.Servo_Z_Speed * deltaTime);
                 else
                     rotation.Z = 359;
             }
@@ -183,15 +194,15 @@ namespace Steadicube.Model
 
             if (joystickMovement.Right_Stick_Y > 0)
             {
-                if (rotationForArduino.X + Math.Abs(joystickMovement.Right_Stick_Y * settings.Servo_X_Speed) <= settings.Servo_X_Max)
-                    rotationForArduino.X += Math.Abs(joystickMovement.Right_Stick_Y * settings.Servo_X_Speed);
+                if (rotationForArduino.X + Math.Abs(joystickMovement.Right_Stick_Y * settings.Servo_X_Speed * deltaTime) <= settings.Servo_X_Max)
+                    rotationForArduino.X += Math.Abs(joystickMovement.Right_Stick_Y * settings.Servo_X_Speed * deltaTime);
                 else
                     rotationForArduino.X = settings.Servo_X_Max;
             }
             else
             {
-                if (rotationForArduino.X - Math.Abs(joystickMovement.Right_Stick_Y * settings.Servo_X_Speed) >= 0)
-                    rotationForArduino.X -= Math.Abs(joystickMovement.Right_Stick_Y * settings.Servo_X_Speed);
+                if (rotationForArduino.X - Math.Abs(joystickMovement.Right_Stick_Y * settings.Servo_X_Speed * deltaTime) >= 0)
+                    rotationForArduino.X -= Math.Abs(joystickMovement.Right_Stick_Y * settings.Servo_X_Speed * deltaTime);
                 else
                     rotationForArduino.X = 0;
             }

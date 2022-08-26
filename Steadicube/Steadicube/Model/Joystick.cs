@@ -74,6 +74,7 @@ namespace Steadicube.Model
             }
         }
 
+        double deltaTime = 1;
         public void Start(Settings settings, CancellationToken ct)
         {
             JoystickMovement joystickMovement = new JoystickMovement();
@@ -86,6 +87,8 @@ namespace Steadicube.Model
 
                 while (true)
                 {
+                    DateTime start_time = DateTime.Now;
+
                     Update(joystickMovement);
 
                     if (ApplicationInit(joystickMovement))
@@ -109,13 +112,15 @@ namespace Steadicube.Model
                             (vector4D) =>
                             {
                                 settings.serial.SendSerial_Vectors(vector4D);
-                            });
+                            },
+                            deltaTime);
 
 
                         ConfigViewModel.configViewModel.camera.Rotate(joystickMovement, settings, (z, x1) =>
                         {
                             settings.serial.SendSerial_Rotate(Math.Round(z).ToString(), Math.Round(x1).ToString());
-                        });
+                        },
+                        deltaTime);
 
 
                         //MoveSteadi_RightStick_OnlySendToArduino(joystickMovement, settings);
@@ -128,6 +133,10 @@ namespace Steadicube.Model
 
                     if (ct.IsCancellationRequested)
                         return;
+
+                    DateTime end_time = DateTime.Now;
+
+                    deltaTime = (end_time - start_time).TotalMilliseconds;
                 }
             });
         }
