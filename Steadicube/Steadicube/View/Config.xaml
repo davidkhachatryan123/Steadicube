@@ -11,7 +11,7 @@
              xmlns:Model="clr-namespace:Steadicube.Model"
              d:DataContext="{d:DesignInstance Type=viewmodel:ConfigViewModel}"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="800" d:DesignWidth="800">
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -142,6 +142,8 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="95"/>
                         <RowDefinition Height="95"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
                         <RowDefinition Height="50"/>
                         <RowDefinition Height="95"/>
                         <RowDefinition Height="*"/>
@@ -285,6 +287,102 @@
                     </Grid>
 
                     <Grid  Grid.Row="3">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="25"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Content="Camera Z Speed:"
+                                        FontWeight="Bold"
+                                        Margin="10 0 0 0"/>
+
+                        <Slider Foreground="#3CAB76"
+                                Value="{Binding Z_Speed_SliderValue}"
+                                Minimum="0"
+                                Maximum="0.1"
+                                VerticalAlignment="Center"
+                                Margin="10 0 10 0"
+                                Grid.Row="1"/>
+
+                    </Grid>
+
+                    <Grid  Grid.Row="4">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="25"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Content="Camera X Speed:"
+                                        FontWeight="Bold"
+                                        Margin="10 0 0 0"/>
+
+                        <Slider Foreground="#3CAB76"
+                                Value="{Binding X_Speed_SliderValue}"
+                                Minimum="0"
+                                Maximum="0.1"
+                                VerticalAlignment="Center"
+                                Margin="10 0 10 0"
+                                Grid.Row="1"/>
+
+                    </Grid>
+
+                    <Grid Grid.Row="5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="60"/>
+                        </Grid.RowDefinitions>
+                        
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Content="Servo X:"
+                                        FontWeight="Bold"
+                                        Margin="10 0 0 0"/>
+                        
+
+                        <TextBox materialDesign:HintAssist.Hint="Max"
+                                 Foreground="Black" materialDesign:TextFieldAssist.UnderlineBrush="#3CAB76"  materialDesign:HintAssist.Foreground="#3CAB76"
+                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                 materialDesign:TextFieldAssist.HasClearButton="True"
+                                 Margin="10 5 10 5"
+                                 Grid.Row="1" Grid.Column="0"
+                                 Text="{Binding Path=Servo_X_Max_Bind,
+                                                UpdateSourceTrigger=PropertyChanged}"/>
+
+                        <TextBox materialDesign:HintAssist.Hint="Center"
+                                 Foreground="Black" materialDesign:TextFieldAssist.UnderlineBrush="#3CAB76"  materialDesign:HintAssist.Foreground="#3CAB76"
+                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                 materialDesign:TextFieldAssist.HasClearButton="True"
+                                 Margin="10 5 10 5"
+                                 Grid.Row="1" Grid.Column="1"
+                                 Text="{Binding Path=Servo_X_Center_Bind,
+                                                UpdateSourceTrigger=PropertyChanged}"/>
+                    </Grid>
+                    
+                    
+                    <Button Content="Save"
+                            Foreground="White"
+                            Background="#3CAB76" BorderBrush="#3CAB76"
+                            Margin="10 0 10 0"
+                            Grid.Row="10"
+                            Command="{Binding SaveCommand}"/>
+
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Calibration">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="100"/>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="100"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+
+                    <Grid Grid.Row="0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
@@ -325,13 +423,86 @@
                                 Command="{Binding D_NullCommand}" />
                     </Grid>
 
-                    <Button Content="Save"
-                            Foreground="White"
-                            Background="#3CAB76" BorderBrush="#3CAB76"
-                            Margin="10 0 10 0"
-                            Grid.Row="10"
-                            Command="{Binding SaveCommand}"/>
+                    <Grid x:Name="Calibration" Grid.Row="2" d:DataContext="{d:DesignInstance Type=Model:Calibration}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
 
+                        <Button Content="A +"
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Foreground="Black"
+                                Background="Green" BorderBrush="Green"
+                                Width="70" Height="50"
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                Command="{Binding A_Plus}" />
+                        <Button Content="A -"
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                Foreground="Black"
+                                Background="Red" BorderBrush="Red"
+                                Width="70" Height="50"
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                Command="{Binding A_Minus}" />
+
+                        <Button Content="B +"
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                Foreground="Black"
+                                Background="Green" BorderBrush="Green"
+                                Width="70" Height="50"
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                Command="{Binding B_Plus}" />
+                        <Button Content="B -"
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Foreground="Black"
+                                Background="Red" BorderBrush="Red"
+                                Width="70" Height="50"
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                Command="{Binding B_Minus}" />
+
+                        <Button Content="C +"
+                                Grid.Row="0"
+                                Grid.Column="2"
+                                Foreground="Black"
+                                Background="Green" BorderBrush="Green"
+                                Width="70" Height="50"
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                Command="{Binding C_Plus}" />
+                        <Button Content="C -"
+                                Grid.Row="1"
+                                Grid.Column="2"
+                                Foreground="Black"
+                                Background="Red" BorderBrush="Red"
+                                Width="70" Height="50"
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                Command="{Binding C_Minus}" />
+
+                        <Button Content="D +"
+                                Grid.Row="0"
+                                Grid.Column="3"
+                                Foreground="Black"
+                                Background="Green" BorderBrush="Green"
+                                Width="70" Height="50"
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                Command="{Binding D_Plus}" />
+                        <Button Content="D -"
+                                Grid.Row="1"
+                                Grid.Column="3"
+                                Foreground="Black"
+                                Background="Red" BorderBrush="Red"
+                                Width="70" Height="50"
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                Command="{Binding D_Minus}" />
+                    </Grid>
                 </Grid>
             </TabItem>
         </dragablz:TabablzControl>

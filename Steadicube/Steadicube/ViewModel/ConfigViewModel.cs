@@ -8,7 +8,6 @@ using System.IO;
 using Steadicube.View;
 
 using DeviceList = System.Collections.Generic.Dictionary<System.Guid, string>;
-using System.Windows.Media.Media3D;
 
 namespace Steadicube.ViewModel
 {
@@ -18,7 +17,7 @@ namespace Steadicube.ViewModel
 
         public Settings settings;
         public Cube cube;
-        public Model.Camera camera;
+        public Camera camera;
 
         private DeviceList joystickDeviceList;
 
@@ -51,6 +50,10 @@ namespace Steadicube.ViewModel
                           }
 
                       SpeedSliderValue = settings.CameraSpeed;
+                      Z_Speed_SliderValue = settings.Servo_Z_Speed;
+                      X_Speed_SliderValue = settings.Servo_X_Speed;
+                      Servo_X_Max_Bind = settings.Servo_X_Max;
+                      Servo_X_Center_Bind = settings.Servo_X_Center;
 
 
                       settings.serial = new Serial();
@@ -252,6 +255,62 @@ namespace Steadicube.ViewModel
                     return settings.CameraSpeed;
 
                 return 0;
+            }
+        }
+
+        public double Z_Speed_SliderValue
+        {
+            set
+            {
+                settings.Servo_Z_Speed = value;
+
+                OnPropertyChanged("Z_Speed_SliderValue");
+            }
+            get
+            {
+                if (settings != null)
+                    return settings.Servo_Z_Speed;
+
+                return 0;
+            }
+        }
+
+        public double X_Speed_SliderValue
+        {
+            set
+            {
+                settings.Servo_X_Speed = value;
+
+                OnPropertyChanged("X_Speed_SliderValue");
+            }
+            get
+            {
+                if (settings != null)
+                    return settings.Servo_X_Speed;
+
+                return 0;
+            }
+        }
+
+        public double Servo_X_Max_Bind
+        {
+            get => settings != null ? settings.Servo_X_Max : 0;
+            set
+            {
+                settings.Servo_X_Max = value;
+
+                OnPropertyChanged("Servo_X_Max_Bind");
+            }
+        }
+
+        public double Servo_X_Center_Bind
+        {
+            get => settings != null ? settings.Servo_X_Center : 0;
+            set
+            {
+                settings.Servo_X_Center = value;
+
+                OnPropertyChanged("Servo_X_Center_Bind");
             }
         }
 

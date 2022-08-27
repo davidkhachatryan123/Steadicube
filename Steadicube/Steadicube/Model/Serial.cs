@@ -141,6 +141,12 @@ namespace Steadicube.Model
         }
 
 
+        public void Send(string value)
+        {
+            if (serialPort!.IsOpen)
+                serialPort!.WriteLine(value);
+        }
+
         ~Serial()
         {
             ClosePort();

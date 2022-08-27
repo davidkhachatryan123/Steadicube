@@ -14,14 +14,6 @@
           }
         }
       },
-      "M2Mqtt/4.3.0": {
-        "runtime": {
-          "lib/net45/M2Mqtt.Net.dll": {
-            "assemblyVersion": "4.3.0.0",
-            "fileVersion": "4.3.0.0"
-          }
-        }
-      },
       "MaterialDesignColors/2.0.6": {
         "runtime": {
           "lib/netcoreapp3.1/MaterialDesignColors.dll": {
@@ -1190,13 +1182,6 @@
       "sha512": "sha512-nSDrLkQniVmvCvg4JlbtMYBD3UtHbJkX64vJ701TZT+IfOqfEA7cQU5da5NqACY9GuwK7R6VbtPp4WGZK1uTaQ==",
       "path": "dragablz/0.0.3.223",
       "hashPath": "dragablz.0.0.3.223.nupkg.sha512"
-    },
-    "M2Mqtt/4.3.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-2A1uM20uxuovQKPA0dkZUqD9gUpIMaX7KxdLiVM7IEXdPRL709hGuudHnvlDxm2/6b2LcOjshrYGVG9vdpipag==",
-      "path": "m2mqtt/4.3.0",
-      "hashPath": "m2mqtt.4.3.0.nupkg.sha512"
     },
     "MaterialDesignColors/2.0.6": {
       "type": "package",

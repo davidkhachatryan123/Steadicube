@@ -1,8 +1,6 @@
-﻿using Steadicube.Enums;
-using System.IO;
+﻿using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using uPLibrary.Networking.M2Mqtt;
 
 namespace Steadicube.Model
 {
@@ -15,14 +13,10 @@ namespace Steadicube.Model
 
 
 
-        [JsonIgnore]
         public double Servo_Z_Speed { get; set; } = 0.05;
 
-        [JsonIgnore]
         public double Servo_X_Speed { get; set; } = 0.05;
-        [JsonIgnore]
         public double Servo_X_Max { get; set; } = 180;
-        [JsonIgnore]
         public double Servo_X_Center { get; set; } = 90;
 
 
