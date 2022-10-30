@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "nFnhwKdDBZk+Zio2uFdS5cEkKNmIg+I8jUPBn7Lzrzr13XnJRRYQABQ7RNEq+Jxyl71rz3BeuDLORQp8plMIwA==",
+  "dgSpecHash": "MRucoIZkIkvLfo/djZOWs/D+KeoV3F2sHjXmvqFRq2Zh75Zd9rxCIogx5+AJtIHyTXcpwtVMhVnJIEny0qZxiw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\david\\Desktop\\Steadicube\\Steadicube\\Steadicube\\Steadicube.csproj",
+  "projectFilePath": "D:\\Programming\\Projects on C#\\Steadicube\\Steadicube\\Steadicube\\Steadicube.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\david\\.nuget\\packages\\dragablz\\0.0.3.223\\dragablz.0.0.3.223.nupkg.sha512",
     "C:\\Users\\david\\.nuget\\packages\\materialdesigncolors\\2.0.6\\materialdesigncolors.2.0.6.nupkg.sha512",

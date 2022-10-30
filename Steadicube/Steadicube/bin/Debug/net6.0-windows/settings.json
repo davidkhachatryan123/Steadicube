@@ -1,1 +1,1 @@
-{"ComPort":"COM7","BaudRate":9600,"JoystickGUID":"8f554490-18e9-11ed-8001-444553540000","CameraSpeed":0.05,"Servo_Z_Speed":0.05,"Servo_X_Speed":0.05,"Servo_X_Max":180,"Servo_X_Center":90,"cube":{"LengthBind":500,"WidthBind":500,"HeightBind":500,"Width":500,"Length":500,"Height":500}}
+{"ComPort":"COM1","BaudRate":9600,"JoystickGUID":"00000000-0000-0000-0000-000000000000","CameraSpeed":0.05,"Servo_Z_Speed":0.05,"Servo_X_Speed":0.05,"Servo_X_Max":180,"Servo_X_Center":90,"cube":{"LengthBind":500,"WidthBind":500,"HeightBind":500,"Width":500,"Length":500,"Height":500}}

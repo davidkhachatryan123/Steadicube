@@ -5171,11 +5171,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\david\\Desktop\\Steadicube\\Steadicube\\Steadicube\\Steadicube.csproj",
+      "projectUniqueName": "D:\\Programming\\Projects on C#\\Steadicube\\Steadicube\\Steadicube\\Steadicube.csproj",
       "projectName": "Steadicube",
-      "projectPath": "C:\\Users\\david\\Desktop\\Steadicube\\Steadicube\\Steadicube\\Steadicube.csproj",
+      "projectPath": "D:\\Programming\\Projects on C#\\Steadicube\\Steadicube\\Steadicube\\Steadicube.csproj",
       "packagesPath": "C:\\Users\\david\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\david\\Desktop\\Steadicube\\Steadicube\\Steadicube\\obj\\",
+      "outputPath": "D:\\Programming\\Projects on C#\\Steadicube\\Steadicube\\Steadicube\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\david\\AppData\\Roaming\\NuGet\\NuGet.Config",
