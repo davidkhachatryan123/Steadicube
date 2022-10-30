@@ -14,8 +14,11 @@ namespace Steadicube.View
             InitializeComponent();
 
             this.DataContext = new ConfigViewModel();
+
             this.Cube.DataContext = new Cube();
             this.Camera.DataContext = new Camera();
+
+            this.Calibration.DataContext = new Calibration();
         }
     }
 }

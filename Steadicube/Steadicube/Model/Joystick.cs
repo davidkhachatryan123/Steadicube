@@ -5,7 +5,7 @@ using Steadicube.ViewModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
-using uPLibrary.Networking.M2Mqtt;
+
 using DeviceList = System.Collections.Generic.Dictionary<System.Guid, string>;
 
 namespace Steadicube.Model

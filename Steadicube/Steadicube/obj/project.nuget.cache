@@ -1,11 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "Ysg6L3Qt2u/CkLvQnqR14rGJTZRKlHe+uOViucThCWYL1zbI9ch8ObsZkCDqFlHn9p3nqO2UYmMJcjOjRz1wTQ==",
+  "dgSpecHash": "nFnhwKdDBZk+Zio2uFdS5cEkKNmIg+I8jUPBn7Lzrzr13XnJRRYQABQ7RNEq+Jxyl71rz3BeuDLORQp8plMIwA==",
   "success": true,
   "projectFilePath": "C:\\Users\\david\\Desktop\\Steadicube\\Steadicube\\Steadicube\\Steadicube.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\david\\.nuget\\packages\\dragablz\\0.0.3.223\\dragablz.0.0.3.223.nupkg.sha512",
-    "C:\\Users\\david\\.nuget\\packages\\m2mqtt\\4.3.0\\m2mqtt.4.3.0.nupkg.sha512",
     "C:\\Users\\david\\.nuget\\packages\\materialdesigncolors\\2.0.6\\materialdesigncolors.2.0.6.nupkg.sha512",
     "C:\\Users\\david\\.nuget\\packages\\materialdesignthemes\\4.5.0\\materialdesignthemes.4.5.0.nupkg.sha512",
     "C:\\Users\\david\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
@@ -93,16 +92,6 @@
     "C:\\Users\\david\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512"
   ],
   "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'M2Mqtt 4.3.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net6.0-windows7.0'. This package may not be fully compatible with your project.",
-      "libraryId": "M2Mqtt",
-      "targetGraphs": [
-        "net6.0-windows7.0"
-      ]
-    },
     {
       "code": "NU1701",
       "level": "Warning",

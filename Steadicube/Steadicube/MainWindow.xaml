@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         xmlns:viewmodel="clr-namespace:Steadicube.ViewModel"
         d:DataContext="{d:DesignInstance Type=viewmodel:MainWindowViewModel}"
-        Title="Text Analyzer"
+        Title="Steadicube"
         Height="600" Width="1000" 
         Background="White" WindowStyle="None" 
         WindowStartupLocation="CenterScreen" ResizeMode="CanResize">
@@ -18,7 +18,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <View:Top Title="Steadycube" />
+        <View:Top Title="Steadicube" />
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
